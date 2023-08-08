@@ -7,17 +7,21 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/styles/style.css">
+	<link rel="stylesheet" href="./assets/styles/modale.css">
+	<script type="module" src="scripts/works.js"></script>
+	<script type="module" src="scripts/modale.js"></script>
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>ARCHITECTE D'INTERIEUR</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="index.html" class="active">projets</a></li>
+            <li><a href="contact.html">contact</a></li>
+            <li><a href="login.html" class="active">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -26,61 +30,72 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<a href="" id="figure-Btn"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>En cas de besoin,une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="text-filtre">
+			<div class="titre_modifier">
+				<h2>Mes Projets</h2>
+				<!-- Trigger/Open The Modal -->
+				<button id="myBtn"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+					<!-- <a href="" id="myBtn"><i class="fa-regular fa-pen-to-square"></i>modifier</a> -->
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<h1>Galerie Photos</h1>
+						<div class="gallery-modal">
+						</div>
+						<div class="trait"></div>
+						<div class="boutonModale">
+							<input id="btn-Ajout" class="btn-ajout" type="submit" value="Ajouter une Photo">
+							<a href="">Supprimer Gallerie</a>
+						</div>
+				    </div>
+				</div>
+				<!-- Trigger/Open The Modal 2 -->
+				<!-- The Modal 2 -->
+				<div id="myModal2" class="modal2">
+					<!-- Modal content 2 -->
+					<div class="icones">
+						<i class="fa-solid fa-arrow-left"></i>
+						<span class="close2">&times;</span>
+					</div>
+					<div class="modal2-content">
+						<h1>Ajout photo</h1>
+						<div class="modal2contener">
+							<i class="fa-regular fa-image"></i>
+							<input id="btn-Ajout" class="btn-ajout" type="submit" value=" + Ajouter Photo">
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<div class="titre-categorie">
+							<label for="titre">Titre</label>
+							<input type="text" id="titre" name="titre" />
+							<label for="categorie">Categorie</label>
+							<input type="text" id="categorie" name="categorie" />
+						</div>
+						<div class="trait2"></div>
+						<input id="valider" class="valider" type="submit" value="Valider">
+					</div>
+				</div>
+			</div>	
+			<div class="div-filtre">
+				<button class="btn-all" onClick="filterWorks(0)">Tous</button>
+				<button class="btn-objets" onClick="filterWorks(3)">Objets</button>
+				<button class="btn-apparts" onClick="filterWorks(1)">Appartements</button>
+				<button class="btn-hotels" onClick="filterWorks(2)">Hôtels & restaurants</button>
+			</div>
+		</div>	
 		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+			
 		</div>
 	</section>
 	<section id="contact">
@@ -106,4 +121,5 @@
 	</nav>
 </footer>
 </body>
+<!--<script src="./scripts/works.js"></script>-->
 </html>
