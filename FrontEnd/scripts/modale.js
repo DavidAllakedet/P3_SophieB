@@ -1,37 +1,3 @@
-// async function afficherWorksModale (){
-//     const reponse = await fetch("http://localhost:5678/api/works")
-//     const json = await reponse.json()
-// }
-// JSON.forEach(work => {
-//     const worksDiv = document.querySelector(".galerie");
-//     const Elementfigure = document.createElement("figure")
-//     Elementfigure.classList.add("figure-modale")
-//     Elementfigure.setAttribute("id", "works" + work.id)
-// //
-//     const Elementimg = document.createElement("img")
-//     Elementimg.src = work.imageUrl
-//     Elementimg.setAttribute("crossorigin", "anonymous" )
-// //
-//     const ElementFigcaption = document.createElement("figcaption")
-//     ElementFigcaption.innerText = "editer"
-// //
-//     const deleteBouton = document.createElement("button")
-//     deleteBouton.setAttribute("id", work.id)
-
-//     deleteBouton.setAttribute("onclick", "deleteWorks(this.id)")
-//     deleteBouton.classList.add("bouton-modale-delete")
-//     const trashIcone = document.querySelector("trash-icone")
-//     const iconeMove = document.querySelector(".icone-move")
-    
-//     worksDiv.appendChild(Elementfigure)
-//     Elementfigure.appendChild(Elementimg)
-//     Elementfigure.appendChild(ElementFigcaption)
-//     Elementfigure.appendChild(deleteBouton)
-//     deleteBouton.appendChild(trashIcone)
-//     deleteBouton.appendChild(iconeMove)
-// });
-
-
 // recuperer les modales
 const modal = document.getElementById("myModal");
 
@@ -41,26 +7,26 @@ const btn = document.getElementById("myBtn");
 // recuperer les elements <span> qui ouvrent les modales
 const span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
+// Quand l'utilisateur click sur lr bouton ,le modale s'ouvre
 
 btn.onclick = function() {
     callApi()
-  modal.style.display = "block";
+  modal.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+// Quand l'utilisateur click sur le span ,la modale se ferme 
 span.onclick = function() {
   modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+   if (event.target == modal) {
+     modal.style.display = "none";
+    }
 }
 
-/****************** .   ****** **********/
+/******************    ****** **********/
 // Get the modal
 var modal2 = document.getElementById("myModal2");
 
@@ -88,33 +54,6 @@ window.onclick = function(event) {
 }
 
 
-// /**********     modale2  ***********/
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const modal2 = document.getElementById("myModal2");
-//   const btnAjout = document.getElementById("btn-ajout");
-//   const span2 = document.getElementsByClassName("close2")[0];
-//   const formModal2 = document.getElementById("modal2-form")
-
-//   btnAjout.onclick = function () {
-//     formModal2.style.display = "block";
-//   };
-
-//   span2.onclick = function () {
-//     modal2.style.display = "none";
-//   };
-
-//   window.onclick = function (event) {
-//     if (event.target == modal2) {
-//       modal2.style.display = "none";
-//     }
-//   };
-// });
-
-
-
-
-
  // Fonction pour afficher les œuvres dans la section "gallery"
  async function callApi(){
     let list ;
@@ -126,6 +65,7 @@ window.onclick = function(event) {
     console.error("erreue lors du fetch", error);
   }   
 }
+// modale qui affiche la gallerie
  function displayWorks(works) {
     const lesProjets = document.querySelector(".gallery-modal");
     
@@ -143,10 +83,121 @@ window.onclick = function(event) {
 
       boutonDelete.classList.add("bouton-S")
       //boutonDelete.addEventListener("click", () => handleDeleteClick(article));
-      boutonDelete.addEventListener("click", function (e) {
-        e.preventDefault()
-         supprimerWork(e)
+      boutonDelete.addEventListener("click", function () {
+        async function supprimerWork () {
+          const workId = article.id
+          const token = localStorage.getItem("mon_token")
+          console.log(token);
+          const promise = await fetch(`http://localhost:5678/api/works/${workId}`, {
+            method: "DELETE",
+            headers:{
+              'Accept' : "*/*",
+              "Authorization" : "Bearer " + token
+            }
+          });
+          if(promise.ok === true){
+            alert(`l'article a l'id ${workId} a ete supprimer avec succes`)
+          } else{
+            console.log(promise.status)
+            throw new Error("impossible de supprimer l'article")
+          }
+         for(let article in works)    {
+          console.log(boutonDelete.id)
+          if(boutonDelete.id === article.id){
+           supprimerWork()
+           }
+         }
+       }
+       supprimerWork()
+    })
+
+//   // ****** Ajouter un nouveau work *******
+
+//     document.getElementById("FormAjoutWork").addEventListener("submit", function (e) {
+//     e.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+//     const formData = new FormData(document.getElementById("FormAjoutWork"));
+//     const token = localStorage.getItem("mon_token");
+
+//     fetch("http://localhost:5678/api/works", {
+//         method: "POST",
+//         headers: {
+//             "Authorization": "Bearer " + token
+//         },
+//         body: formData
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         // Traiter la réponse du serveur ici
+//         console.log(data);
+//     })
+//     .catch(error => {
+//         console.error("Erreur lors de l'envoi de la requête POST : ", error);
+//     });
+// });
+
+// // Sélectionnez l'élément d'entrée de fichier et l'élément de prévisualisation d'image
+// const fileInput = document.getElementById('btn-Ajout');
+// const imagePreview = document.getElementById('image-preview');
+
+// // Écoutez l'événement de changement de fichier sur l'élément d'entrée de fichier
+// fileInput.addEventListener('change', function () {
+//     const file = fileInput.files[0]; // Obtenez le fichier sélectionné
+
+//     if (file) {
+//         // Créez un objet URL pour le fichier
+//         const imageURL = URL.createObjectURL(file);
+
+//         // Affichez l'image prévisualisée dans l'élément img
+//         imagePreview.src = imageURL;
+//         imagePreview.style.display = 'block'; // Montrez l'élément d'image
+//     } else {
+//         // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
+//         imagePreview.style.display = 'none';
+//     }
+// });
+document.getElementById("FormAjoutWork").addEventListener("submit", function (e) {
+  e.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+  const formData = new FormData(document.getElementById("FormAjoutWork"));
+  const token = localStorage.getItem("mon_token");
+
+  // Récupérez le fichier sélectionné par l'utilisateur
+  const file = formData.get("image");
+
+  // Vérifiez si un fichier a été sélectionné
+  if (file) {
+      // Créez un objet URL pour le fichier
+      const imageURL = URL.createObjectURL(file);
+
+      // Affichez l'image prévisualisée dans l'élément img
+      const imagePreview = document.getElementById('image-preview');
+      imagePreview.src = imageURL;
+      imagePreview.style.display = 'block'; // Montrez l'élément d'image
+
+      // Envoyez le formulaire avec l'image
+      fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          headers: {
+              "Authorization": "Bearer " + token
+          },
+          body: formData
       })
+      .then(response => response.json())
+      .then(data => {
+          // Traitez la réponse du serveur ici
+          console.log(data);
+      })
+      .catch(error => {
+          console.error("Erreur lors de l'envoi de la requête POST : ", error);
+      });
+  } else {
+      // Gérez le cas où aucun fichier n'a été sélectionné
+      console.error("Aucun fichier sélectionné.");
+  }
+});
+
+
       const boutonItrash = document.createElement("i")
       boutonItrash.classList.add("fa-solid") 
       boutonItrash.classList.add("fa-trash-can")
@@ -175,42 +226,7 @@ window.onclick = function(event) {
       lesProjets.appendChild(workElement);
     }
   }
-   function supprimerWork (e) {
-    const workId = parseInt(e.target.id);
-    const articleRec = document.querySelector("card")
-    console.log(articleRec)
-    fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: "DELETE",
-    }).then((response) => response.json())
-   }
-  // async function supprimerWork(e) {
-  //   const workId = parseInt(e.target.id);
-  //   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"; // Replace this with the actual token if needed
-  
-  //   try {
-  //     const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         authorization: `bearer ${token}`,
-  //         accept: "application/json",
-  //       },
-  //     });
-  
-  //     if (response.status === 200) {
-  //       console.log("supprimer avec succes!");
-  //       // Call the API again to refresh the works list after deletion
-  //       callApi();
-  //     } else {
-  //       console.error("impossible de supprimer");
-  //     }
-  //   } catch (error) {
-  //     console.error("Erreur lors de l'envoie des donnees:", error);
-  //   }
-  // }
-  
-  
-  // The function supprimerWork() call here seems to be redundant and can be removed.
-  // It should only be called when the delete button is clicked in the displayWorks function.
+
   
  
  

@@ -50,7 +50,10 @@
 				<div id="myModal" class="modal">
 					<!-- Modal content -->
 					<div class="modal-content">
-						<span class="close">&times;</span>
+						<div class="close">
+							<i></i>
+							<span class="close1">&times;</span>
+						</div>
 						<h1>Galerie Photos</h1>
 						<div class="gallery-modal">
 						</div>
@@ -69,21 +72,29 @@
 						<i class="fa-solid fa-arrow-left"></i>
 						<span class="close2">&times;</span>
 					</div>
+					<h1>Ajout photo</h1>
 					<div class="modal2-content">
-						<h1>Ajout photo</h1>
-						<div class="modal2contener">
-							<i class="fa-regular fa-image"></i>
-							<input id="btn-Ajout" class="btn-ajout" type="submit" value=" + Ajouter Photo">
-							<p>jpg, png : 4mo max</p>
-						</div>
-						<div class="titre-categorie">
-							<label for="titre">Titre</label>
-							<input type="text" id="titre" name="titre" />
-							<label for="categorie">Categorie</label>
-							<input type="text" id="categorie" name="categorie" />
-						</div>
-						<div class="trait2"></div>
-						<input id="valider" class="valider" type="submit" value="Valider">
+						<form id="FormAjoutWork" enctype="multipart/form-data">
+							<div class="modal2contener">
+								<i class="fa-regular fa-image"></i>
+								<!-- L'élément d'entrée de fichier est masqué (visibility:hidden) -->
+								<input id="btn-Ajout" class="file-input" type="file" accept="image/jpeg, image/png" name="image" >
+								<!-- Bouton personnalisé -->
+								<label for="btn-Ajout" class="btn-ajout">+ Ajouter Photo</label>
+								<p>jpg, png : 4mo max</p>
+							</div>
+							<div id="image-preview-container">
+								<img id="image-preview" src="#" alt="Aperçu de l'image" style="display: none; max-width: 100%; max-height: 200px;">
+							</div>
+							<div class="titre-categorie">
+								<label for="titre">Titre</label>
+								<input type="text" id="titre" name="titre" />
+								<label for="categorie">Categorie</label>
+								<input type="text" id="categorie" name="categorie" />
+							</div>
+							<div class="trait2"></div>
+							<input id="valider" class="valider" type="submit" value="Valider">
+						</form>	
 					</div>
 				</div>
 			</div>	
