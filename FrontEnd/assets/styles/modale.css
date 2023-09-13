@@ -638,11 +638,7 @@ background-color: #1D6154;
 	justify-content: center;
 	align-items: center;
 } */
-/* .modal3 .modal3-content .modal3contener .fa-image {
-	font-size: 100px;
-	color: #CBD6DC;
-	align-items: center;
-} */
+
 .modal3-content > * {
 	text-align: center;
 }
