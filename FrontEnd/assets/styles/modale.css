@@ -529,6 +529,185 @@ background-color: #1D6154;
 	border-radius: 60px ;
 	border: none;
 }
+
+/********* modale 3 css ********/
+.modal3 {
+	display: none; 
+	position: absolute; 
+	align-items: center;
+	justify-content: center;
+	width: 630px; 
+	top: 45%;
+	left: 32%;
+	border: none;
+	background-color: #fefefe;
+	padding: 10px 25px 25px 25px; 
+}
+.modal3  h1{
+	font-family: Work Sans;
+	text-align: center;
+	margin-bottom: 1em;
+	color: black;
+}
+.modal3 .icones3{
+	opacity: 0;
+	padding-top: 20px;
+	width: 630px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-size: x-large;
+	/* margin: 0 -50px; */
+}
+.icones3:hover,
+.icones3:focus {
+	opacity: 100%;
+     color: black;
+	 text-decoration: none;
+     cursor: pointer;
+}
+/* Modal Content */
+.modal3 .modal3-content {
+	padding-top: 20px;
+	width: 100%; 
+	align-items: center; 
+	justify-content: center;
+	border: 1px solid #888;
+	border: none;
+	border-radius: 10px;
+	/* margin-left: 30px; */
+} 
+.modal3 .modal3-content form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	align-items: center;
+}
+/* .image-preview-container{
+	
+} */
+.modal3 .modal3-content form .modal3contener{
+	/* position: relative;
+    display: inline-block; */
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	justify-items: center;
+	align-items: center;
+	/* padding: 20px 0; */
+} /*
+/* Styles pour le conteneur du champ de fichier et du bouton */
+/* .file-input-container {
+    position: relative;
+    display: inline-block;
+} */
+
+/* Styles pour le bouton personnalisé */
+/* .btn-ajout {
+    display: inline-block;
+    width: 250px;
+	font-family: 'Syne';
+	color: #306685;
+	background-color: #CBD6DC;
+	margin : 1em auto ;
+    padding: 20px 20px;
+    cursor: pointer;
+	border: none;
+	border-radius: 60px ;
+} */
+
+/* Styles pour l'élément d'entrée de fichier masqué */
+/* .file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+} */
+
+/* .modal3 form{
+	width: ;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+} */
+/* .modal3 .modal3-content .modal3contener .fa-image {
+	font-size: 100px;
+	color: #CBD6DC;
+	align-items: center;
+} */
+.modal3-content > * {
+	text-align: center;
+}
+.modal3contener .image-preview-container{
+	display: block;
+	/* bottom: 50%;*/
+} 
+.modal3 .modal3-content form .titre-categorie2{
+	width: 80%;
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+}
+.modal3 .titre-categorie2 input{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modal3 .titre-categorie2 label {
+	margin: 2em 0 1em 0;
+}
+/* .modal3 .modal3contener .btn-ajout{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	width: 250px;
+	color: #306685;
+	background-color: #CBD6DC;
+	margin : 1em auto ;
+    padding: 20px 30px;
+	text-align: center;
+	align-items: center;
+	border: none;
+	border-radius: 60px ;
+} */
+.modal3-content .trait3{
+	margin-top: 50px;
+    height: 2px;
+	justify-content: center;
+	width: 80%;
+    background-color: #B3B3B3;
+}
+
+.modal3-content .valider2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+	width: 320px;
+}
+.modal3-content input[type="submit"]{ 
+	display: flex;
+	font-family: 'Syne';
+	font-size: 18px;
+	color: white;
+	background-color: #1D6154;
+    padding: 15px 60px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;

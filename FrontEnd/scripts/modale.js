@@ -26,33 +26,59 @@ window.onclick = function(event) {
     }
 }
 
-/******************    ****** **********/
-// Get the modal
+/******************  modale2  ****** **********/
+// recuperer la modale
 var modal2 = document.getElementById("myModal2");
 
-// Get the button that opens the modal
+//recuperer le bouton qui ouvre la modale
 var btnAjout = document.getElementById("btn-Ajout");
 
-// Get the <span> element that closes the modal
+// recuperer l'element du span qui ferme la modale
 var span2 = document.getElementsByClassName("close2")[0];
 
-// When the user clicks on the button, open the modal
+// Quand l'utilisateur clique sur le bouton ca ouvre la modale 
 btnAjout.onclick = function() {
   modal2.style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+// Quand l'utilisateur clique sur sapn, ca ferme la modale
 span2.onclick = function() {
   modal2.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
+//Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
 window.onclick = function(event) {
   if (event.target == modal2) {
     modal2.style.display = "none";
   }
 }
 
+/******************  modale3  ****** **********/
+// recuperer la modale 3
+var modal3 = document.getElementById("myModal3");
+
+//recuperer le bouton qui ouvre la modale
+var btnValider = document.getElementById("valider");
+
+// recuperer l'element du span qui ferme la modale
+var span3 = document.getElementsByClassName("close3")[1];
+
+// Quand l'utilisateur clique sur le bouton ca ouvre la modale 
+btnValider.onclick = function() {
+  modal3.style.display = "block";
+}
+
+// Quand l'utilisateur clique sur sapn, ca ferme la modale
+span3.onclick = function() {
+  modal3.style.display = "none";
+}
+
+//Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
+window.onclick = function(event) {
+  if (event.target == modal3) {
+    modal3.style.display = "none";
+  }
+}
 
  // Fonction pour afficher les œuvres dans la section "gallery"
  async function callApi(){
