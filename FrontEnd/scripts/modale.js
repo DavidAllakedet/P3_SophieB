@@ -61,7 +61,7 @@ var modal3 = document.getElementById("myModal3");
 var btnValider = document.getElementById("valider");
 
 // recuperer l'element du span qui ferme la modale
-var span3 = document.getElementsByClassName("close3")[1];
+var span3 = document.getElementsByClassName("close3")[0];
 
 // Quand l'utilisateur clique sur le bouton ca ouvre la modale 
 btnValider.onclick = function() {
@@ -184,7 +184,7 @@ window.onclick = function(event) {
 // });
 document.getElementById("FormAjoutWork").addEventListener("submit", function (e) {
   e.preventDefault(); // Empêche le comportement par défaut du formulaire
-
+console.log("blabla")
   const formData = new FormData(document.getElementById("FormAjoutWork"));
   const token = localStorage.getItem("mon_token");
 
