@@ -181,19 +181,19 @@ li:hover {
 }
 
 /************   la modale  *********/
-.modal {
-    display: none; 
+.modaleMentor {
+    /* display: none;  */
     position: absolute; 
     align-items: center;
     justify-content: center;
-    width: 630px; 
-    top: 45%;
-    left: 32%;
+    width: 700px; 
+    top: 70%;
+     /* left: 32%; */
     border: none;
 	border-radius: 10px;
     background-color:white; 
     }
-    .modal-content h1 {
+    .modaleMentor h1 {
 		font-family: Work Sans;
 		text-align: center;
 		margin-bottom: 1em;
@@ -201,25 +201,25 @@ li:hover {
 		color: black;
 	}
     /* Modal Content/Box */
-    .modal-content{
+    /* .modal-content{
         background-color: #fefefe;
-        padding: 5px 60px 25px 60px;
+        padding: 5px 30px 20px 30px; 
         border: 1px solid #888;
-        width: 90%; 
+        width: 100%; 
         height: 100%;
         border: none;
         justify-content: center;
         align-items: center;
-    }
+    } */
     /* The Close Button */
     .close {
 		opacity: 0;
-		width: 600px;
+		width: 100%;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		font-size: x-large;
-		padding-top: 20px;
+		padding-right: 60px ; 
     }
     
     .close:hover,
@@ -230,7 +230,7 @@ li:hover {
      cursor: pointer;
     }
 
-#myBtn{
+#firstStepModalBtn{
 	font-size: 20px;
 	display: flex;
 	flex-direction: row;
@@ -240,11 +240,13 @@ li:hover {
     gap: 10px;
 }
 .gallery-modal {
+	/* width: 600px; */
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	margin: 40px 0;
+	padding: 5px 60px 10px 60px; 
     background-color: white;
 }
 /* article card avec boutons et image */
@@ -254,8 +256,8 @@ li:hover {
 }
 .gallery-modal .bouton-contener-card {
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	/* top: 5px;
+	right: 5px; */
     
 }
 .gallery-modal article{
@@ -276,15 +278,16 @@ li:hover {
     background-color: black;
     
 }
-.modal-content .trait{
+.modaleMentor .trait{
     margin-top: 40px;
     height: 2px;
 	justify-content: center;
 	align-items: center;
     align-self: center;
     background-color: #B3B3B3;
+	margin: 5px 60px 10px 60px; 
 }
-.boutonModale .btn-ajout{
+.boutonModale .secondStepModalBtn{
 	display: flex;
 	font-family: 'Syne';
 	font-size: 18px;
@@ -298,22 +301,24 @@ li:hover {
 	border-radius: 60px ;
 	border: none;
 }
-.boutonModale a{
+/* .boutonModale a{
 	display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
 	text-decoration: none;
 	color: red;
-}
-.boutonModale input[type="submit"]{
+	margin-bottom: 20px;
+} */
+.boutonModale .secondStepModalBtn{
+	width: 260px;
     display: flex;
 	font-family: 'Syne';
 	font-size: 15px;
 	color: white;
 	background-color: #1D6154;
 	margin-top : 50px;
-    padding: 15px 50px;
+    /* padding: 15px 50px; */
 	text-align: center;
 	border-radius: 60px ;
     justify-content: center;
@@ -358,8 +363,8 @@ background-color: #1D6154;
 	border: #1D6154 solid;	
 }
 /********* modale 2 css ********/
-.modal2 {
-	display: none; 
+.secondStepModal {
+	/* display: none;  */
 	position: absolute; 
 	align-items: center;
 	justify-content: center;
@@ -370,13 +375,13 @@ background-color: #1D6154;
 	background-color: #fefefe;
 	padding: 10px 25px 25px 25px; 
 }
-.modal2  h1{
+.secondStepModal  h1{
 	font-family: Work Sans;
 	text-align: center;
 	margin-bottom: 1em;
 	color: black;
 }
-.modal2 .icones{
+.secondStepModal .icones{
 	opacity: 0;
 	padding-top: 20px;
 	width: 630px;
@@ -394,7 +399,7 @@ background-color: #1D6154;
      cursor: pointer;
 }
 /* Modal Content */
-.modal2 .modal2-content {
+.modalsecondStepModal2 .modal2-content {
 	padding-top: 20px;
 	width: 100%; 
 	align-items: center; 
@@ -404,14 +409,14 @@ background-color: #1D6154;
 	border-radius: 10px;
 	/* margin-left: 30px; */
 } 
-.modal2 .modal2-content form{
+.secondStepModal .modal2-content form{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
 	align-items: center;
 }
-.modal2 .modal2-content form .modal2contener{
+.secondStepModal .modal2-content form .modal2contener{
 	position: relative;
     display: inline-block;
 	width: 80%;
@@ -460,7 +465,7 @@ background-color: #1D6154;
 	justify-content: center;
 	align-items: center;
 } */
-.modal2 .modal2-content .modal2contener .fa-image {
+.secondStepModal .modal2-content .modal2contener .fa-image {
 	font-size: 100px;
 	color: #CBD6DC;
 	align-items: center;
@@ -471,7 +476,7 @@ background-color: #1D6154;
 #image-preview-container{
 	bottom: 50%;
 }
-.modal2 .modal2-content form .titre-categorie{
+.secondStepModal .modal2-content form .titre-categorie{
 	width: 80%;
 	text-align: left;
 	margin-top:30px;
@@ -480,16 +485,16 @@ background-color: #1D6154;
 	justify-content: center;
 	
 }
-.modal2 .titre-categorie input{
+.secondStepModal .titre-categorie input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modal2 .titre-categorie label {
+.secondStepModal .titre-categorie label {
 	margin: 2em 0 1em 0;
 }
-.modal2 .modal2contener .btn-ajout{
+.secondStepModal .modal2contener .btn-ajout{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';

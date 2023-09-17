@@ -1,57 +1,61 @@
-// recuperer les modales
-const modal = document.getElementById("myModal");
+// // recuperer les modales
+// const modal = document.getElementById("myModal");
 
-//recuperer les boutons qui ouvrent les modales
-const btn = document.getElementById("myBtn");
+// //recuperer les boutons qui ouvrent les modales
+// const btn = document.getElementById("myBtn");
 
-// recuperer les elements <span> qui ouvrent les modales
-const span = document.getElementsByClassName("close")[0];
+// // recuperer les elements <span> qui ouvrent les modales
+// const span = document.getElementsByClassName("close")[0];
 
-// Quand l'utilisateur click sur lr bouton ,le modale s'ouvre
+// // Quand l'utilisateur click sur lr bouton ,le modale s'ouvre
 
-btn.onclick = function() {
-    callApi()
-  modal.style.display = "block";
-}
+// btn.onclick = function() {
+//     callApi()
+//   modal.style.display = "block";
+// }
 
-// Quand l'utilisateur click sur le span ,la modale se ferme 
-span.onclick = function() {
-  modal.style.display = "none";
-}
+// // Quand l'utilisateur click sur le span ,la modale se ferme 
+// span.onclick = function() {
+//   modal.style.display = "none";
+// }
 
-//Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
-window.onclick = function(event) {
-   if (event.target == modal) {
-     modal.style.display = "none";
-    }
-}
+// //Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
+// window.onclick = function(event) {
+//    if (event.target == modal) {
+//      modal.style.display = "none";
+//     }
+// }
 
-/******************  modale2  ****** **********/
-// recuperer la modale
-var modal2 = document.getElementById("myModal2");
+// /******************  modale2  ****** **********/
+// // recuperer la modale
+// var modal2 = document.getElementById("myModal2");
 
-//recuperer le bouton qui ouvre la modale
-var btnAjout = document.getElementById("btn-Ajout");
+// //recuperer le bouton qui ouvre la modale
+// var btnAjout = document.getElementById("btn-Ajout");
 
-// recuperer l'element du span qui ferme la modale
-var span2 = document.getElementsByClassName("close2")[0];
+// // recuperer l'element du span qui ferme la modale
+// var span2 = document.getElementsByClassName("close2")[0];
 
-// Quand l'utilisateur clique sur le bouton ca ouvre la modale 
-btnAjout.onclick = function() {
-  modal2.style.display = "block";
-}
+// // Quand l'utilisateur clique sur le bouton ca ouvre la modale 
+// btnAjout.onclick = function() {
+//   modal2.style.display = "block";
+// }
 
-// Quand l'utilisateur clique sur sapn, ca ferme la modale
-span2.onclick = function() {
-  modal2.style.display = "none";
-}
+// // Quand l'utilisateur clique sur sapn, ca ferme la modale
+// span2.onclick = function() {
+//   modal2.style.display = "none";
+// }
 
-//Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
-window.onclick = function(event) {
-  if (event.target == modal2) {
-    modal2.style.display = "none";
-  }
-}
+// //Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
+// window.onclick = function(event) {
+//   if (!event.target.matches('close2')) {
+//     if(modal2.classList.contains('show')){
+//       modal2.classList.remove('show')
+//     }
+//     // modal2.style.display = "none";
+//   }
+// }
+// modal2.addEventListener('click', event => event.stopPropagation)
 
 /******************  modale3  ****** **********/
 // recuperer la modale 3
@@ -63,22 +67,53 @@ var btnValider = document.getElementById("valider");
 // recuperer l'element du span qui ferme la modale
 var span3 = document.getElementsByClassName("close3")[0];
 
-// Quand l'utilisateur clique sur le bouton ca ouvre la modale 
-btnValider.onclick = function() {
-  modal3.style.display = "block";
-}
+// // Quand l'utilisateur clique sur le bouton ca ouvre la modale 
+// btnValider.onclick = function() {
+//   modal3.style.display = "block";
+// }
 
-// Quand l'utilisateur clique sur sapn, ca ferme la modale
-span3.onclick = function() {
-  modal3.style.display = "none";
-}
+// // Quand l'utilisateur clique sur sapn, ca ferme la modale
+// span3.onclick = function() {
+//   modal3.style.display = "none";
+// }
 
-//Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
-window.onclick = function(event) {
-  if (event.target == modal3) {
-    modal3.style.display = "none";
+// //Quand l'utilisateur clique n'importe ou en dehors de la modale ca ferme la modale
+// window.onclick = function(event) {
+//   if (event.target == modal3) {
+//     modal3.style.display = "none";
+//   }
+// }
+
+
+// Boutons pour ouvrir les modales
+const firstStepModalBtn = document.getElementById('firstStepModalBtn');
+const secondStepModalBtn = document.getElementById('secondStepModalBtn');
+
+// Sélecteur Modales
+const firstStepModal = document.getElementById('firstStepModal');
+const secondStepModal = document.getElementById('secondStepModal');
+
+// On écoute le click sur le bouton pour ouvrir la modale
+firstStepModalBtn.addEventListener('click', () => {
+ 
+  const firstStepModal = document.getElementById('firstStepModal');
+  callApi()
+  firstStepModal.showModal();
+});
+
+// Pour ouvrir la seconde modale on écoute le click sur le bouton de la première modale
+secondStepModalBtn.addEventListener('click', () => {
+  firstStepModal.close();
+  secondStepModal.showModal();
+});
+
+// On écoute le click sur la fenêtre si la modale est ouverte et que l'élément cliqué est différent de la fenêtre alors on ferme la modale
+window.addEventListener('click', (e) => {
+  if ((e.target == firstStepModal && firstStepModal.open) || (e.target == secondStepModal && secondStepModal.open)) {
+    firstStepModal.close();
+    secondStepModal.close();
   }
-}
+});
 
  // Fonction pour afficher les œuvres dans la section "gallery"
  async function callApi(){
