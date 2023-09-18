@@ -88,17 +88,18 @@ var span3 = document.getElementsByClassName("close3")[0];
 // Boutons pour ouvrir les modales
 const firstStepModalBtn = document.getElementById('firstStepModalBtn');
 const secondStepModalBtn = document.getElementById('secondStepModalBtn');
+const thirdStepModalBtn = document.getElementById('thirdStepModalBtn');
 
 // Sélecteur Modales
 const firstStepModal = document.getElementById('firstStepModal');
 const secondStepModal = document.getElementById('secondStepModal');
+const thirdStepModal = document.getElementById('thirdStepModal');
 
 // On écoute le click sur le bouton pour ouvrir la modale
 firstStepModalBtn.addEventListener('click', () => {
- 
   const firstStepModal = document.getElementById('firstStepModal');
-  callApi()
   firstStepModal.showModal();
+  callApi()
 });
 
 // Pour ouvrir la seconde modale on écoute le click sur le bouton de la première modale
@@ -107,11 +108,23 @@ secondStepModalBtn.addEventListener('click', () => {
   secondStepModal.showModal();
 });
 
+thirdStepModalBtn.addEventListener('click', () => {
+  secondStepModal.close();
+  thirdStepModal.showModal();
+});
+
 // On écoute le click sur la fenêtre si la modale est ouverte et que l'élément cliqué est différent de la fenêtre alors on ferme la modale
 window.addEventListener('click', (e) => {
   if ((e.target == firstStepModal && firstStepModal.open) || (e.target == secondStepModal && secondStepModal.open)) {
     firstStepModal.close();
     secondStepModal.close();
+  }
+});
+
+window.addEventListener('click', (e) => {
+  if ((e.target == secondStepModal && secondStepModal.open) || (e.target == thirdStepModal && thirdStepModal.open)) {
+    secondStepModal.close();
+    thirdStepModal.close();
   }
 });
 
@@ -197,26 +210,26 @@ window.addEventListener('click', (e) => {
 //     });
 // });
 
-// // Sélectionnez l'élément d'entrée de fichier et l'élément de prévisualisation d'image
-// const fileInput = document.getElementById('btn-Ajout');
-// const imagePreview = document.getElementById('image-preview');
+// Sélectionnez l'élément d'entrée de fichier et l'élément de prévisualisation d'image
+const fileInput = document.getElementById('btn-Ajout');
+const imagePreview = document.getElementById('image-preview');
 
-// // Écoutez l'événement de changement de fichier sur l'élément d'entrée de fichier
-// fileInput.addEventListener('change', function () {
-//     const file = fileInput.files[0]; // Obtenez le fichier sélectionné
+// Écoutez l'événement de changement de fichier sur l'élément d'entrée de fichier
+fileInput.addEventListener('change', function () {
+    const file = fileInput.files[0]; // Obtenez le fichier sélectionné
 
-//     if (file) {
-//         // Créez un objet URL pour le fichier
-//         const imageURL = URL.createObjectURL(file);
+    if (file) {
+        // Créez un objet URL pour le fichier
+        const imageURL = URL.createObjectURL(file);
 
-//         // Affichez l'image prévisualisée dans l'élément img
-//         imagePreview.src = imageURL;
-//         imagePreview.style.display = 'block'; // Montrez l'élément d'image
-//     } else {
-//         // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
-//         imagePreview.style.display = 'none';
-//     }
-// });
+        // Affichez l'image prévisualisée dans l'élément img
+        imagePreview.src = imageURL;
+        imagePreview.style.display = 'block'; // Montrez l'élément d'image
+    } else {
+        // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
+        imagePreview.style.display = 'none';
+    }
+});
 document.getElementById("FormAjoutWork").addEventListener("submit", function (e) {
   e.preventDefault(); // Empêche le comportement par défaut du formulaire
 console.log("blabla")

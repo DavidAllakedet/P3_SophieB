@@ -219,9 +219,17 @@ li:hover {
 		flex-direction: row;
 		justify-content: space-between;
 		font-size: x-large;
+		background-color: white;
 		padding-right: 60px ; 
     }
     
+	.close button{
+		background-color: white;
+	border: none;
+	font-weight: bolder ;
+	font-size: x-large;
+	padding: 0 20px;
+	}
     .close:hover,
     .close:focus {
 		opacity: 100%;
@@ -285,7 +293,7 @@ li:hover {
 	align-items: center;
     align-self: center;
     background-color: #B3B3B3;
-	margin: 5px 60px 10px 60px; 
+	margin: 50px; 
 }
 .boutonModale .secondStepModalBtn{
 	display: flex;
@@ -295,11 +303,14 @@ li:hover {
     align-items: center;
     justify-content: center;
     align-self: center;
-	width: 240px;
-	padding: 15px 20px;
+	width: 340px;
+	padding: 20px 20px;
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
+	color: white;
+	background-color: #1D6154;
+
 }
 /* .boutonModale a{
 	display: flex;
@@ -310,20 +321,7 @@ li:hover {
 	color: red;
 	margin-bottom: 20px;
 } */
-.boutonModale .secondStepModalBtn{
-	width: 260px;
-    display: flex;
-	font-family: 'Syne';
-	font-size: 15px;
-	color: white;
-	background-color: #1D6154;
-	margin-top : 50px;
-    /* padding: 15px 50px; */
-	text-align: center;
-	border-radius: 60px ;
-    justify-content: center;
-	border: none;
-}
+	
 #text-filtre{
 display: flex;
 flex-direction: column;
@@ -363,33 +361,41 @@ background-color: #1D6154;
 	border: #1D6154 solid;	
 }
 /********* modale 2 css ********/
-.secondStepModal {
+.modaleMentor2 {
 	/* display: none;  */
 	position: absolute; 
 	align-items: center;
 	justify-content: center;
-	width: 630px; 
-	top: 45%;
-	left: 32%;
+	width: 700px; 
+	top: 70%;
+	/* left: 32%; */
 	border: none;
 	background-color: #fefefe;
-	padding: 10px 25px 25px 25px; 
+	/* padding: 10px 25px 25px 25px;  */
 }
-.secondStepModal  h1{
+.modaleMentor2 h1{
 	font-family: Work Sans;
 	text-align: center;
 	margin-bottom: 1em;
 	color: black;
 }
-.secondStepModal .icones{
+.modaleMentor2 .icones{
 	opacity: 0;
 	padding-top: 20px;
-	width: 630px;
+	width: 700px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	font-size: x-large;
+	background-color: none;
 	/* margin: 0 -50px; */
+}
+.modaleMentor2 .icones button{
+	background-color: white;
+	border: none;
+	font-weight: bolder ;
+	font-size: x-large;
+	padding: 0 20px;
 }
 .icones:hover,
 .icones:focus {
@@ -399,7 +405,7 @@ background-color: #1D6154;
      cursor: pointer;
 }
 /* Modal Content */
-.modalsecondStepModal2 .modal2-content {
+/* .modaleMentor2   {
 	padding-top: 20px;
 	width: 100%; 
 	align-items: center; 
@@ -407,25 +413,28 @@ background-color: #1D6154;
 	border: 1px solid #888;
 	border: none;
 	border-radius: 10px;
-	/* margin-left: 30px; */
+	/* margin-left: 30px;
 } 
-.secondStepModal .modal2-content form{
+ */
+.modaleMentor2 form{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100%;
+	/* width: 700px; */
 	align-items: center;
+	padding: 10px 60px 25px 60px; 
 }
-.secondStepModal .modal2-content form .modal2contener{
+.modaleMentor2 form .modal2contener{
 	position: relative;
     display: inline-block;
-	width: 80%;
+	width: 100%;
 	flex-direction: column;
 	background-color: #E8F1F6;
 	border-radius: 3px;
 	justify-items: center;
 	align-items: center;
-	padding: 20px 0;
+	padding: 30px 0;
+	/* margin: 5px 60px 10px 60px;  */
 }
 /* Styles pour le conteneur du champ de fichier et du bouton */
 /* .file-input-container {
@@ -434,7 +443,7 @@ background-color: #1D6154;
 } */
 
 /* Styles pour le bouton personnalisé */
-.btn-ajout {
+.secondStepModalBtn {
     display: inline-block;
     width: 250px;
 	font-family: 'Syne';
@@ -452,7 +461,7 @@ background-color: #1D6154;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     opacity: 0;
     cursor: pointer;
@@ -465,36 +474,36 @@ background-color: #1D6154;
 	justify-content: center;
 	align-items: center;
 } */
-.secondStepModal .modal2-content .modal2contener .fa-image {
+.modaleMentor2 .modal2contener .fa-image {
 	font-size: 100px;
 	color: #CBD6DC;
 	align-items: center;
 }
-.modal2-content > * {
+  form > * {
 	text-align: center;
-}
+} */
 #image-preview-container{
 	bottom: 50%;
 }
-.secondStepModal .modal2-content form .titre-categorie{
-	width: 80%;
+.modaleMentor2 form .titre-categorie{
+	width: 100%;
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	
+	/* padding: 5px 60px 10px 60px;  */
 }
-.secondStepModal .titre-categorie input{
+.modaleMentor2  .titre-categorie input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.secondStepModal .titre-categorie label {
+.modaleMentor2  .titre-categorie label {
 	margin: 2em 0 1em 0;
 }
-.secondStepModal .modal2contener .btn-ajout{
+.modaleMentor2  .modal2contener .btn-ajout{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -508,71 +517,76 @@ background-color: #1D6154;
 	border: none;
 	border-radius: 60px ;
 }
-.modal2-content .trait2{
+  .trait2{
 	margin-top: 50px;
     height: 2px;
 	justify-content: center;
-	width: 80%;
+	width: 100%;
     background-color: #B3B3B3;
+	margin: 50px ; 
 }
-
-.modal2-content .valider{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-	width: 320px;
-}
-.modal2-content input[type="submit"]{ 
+  .thirdStepModalBtn{
 	display: flex;
 	font-family: 'Syne';
 	font-size: 18px;
-	color: white;
-	background-color: #A7A7A7;
-    padding: 15px 60px;
+	margin: 10px auto 30px auto;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+	width: 340px;
+	padding: 20px 20px;
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
+	color: white;
+	background-color: #A7A7A7;
 }
-
 /********* modale 3 css ********/
-.modal3 {
-	display: none; 
+.modaleMentor3 {
+	/* display: none;  */
 	position: absolute; 
 	align-items: center;
 	justify-content: center;
-	width: 630px; 
-	top: 45%;
-	left: 32%;
+	width: 700px; 
+	top: 70%;
+	/* left: 32%; */
 	border: none;
 	background-color: #fefefe;
-	padding: 10px 25px 25px 25px; 
+	/* padding: 10px 25px 25px 25px;  */
 }
-.modal3  h1{
+.modaleMentor3  h1{
 	font-family: Work Sans;
 	text-align: center;
 	margin-bottom: 1em;
 	color: black;
 }
-.modal3 .icones3{
+.modaleMentor3 .icones2{
 	opacity: 0;
 	padding-top: 20px;
-	width: 630px;
+	width: 700px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	font-size: x-large;
+	background-color: none;
 	/* margin: 0 -50px; */
 }
-.icones3:hover,
-.icones3:focus {
+.modaleMentor3 .icones2 button{
+	background-color: white;
+	border: none;
+	font-weight: bolder ;
+	font-size: x-large;
+	padding: 0 20px;
+}
+.icones2:hover,
+.icones2:focus {
 	opacity: 100%;
      color: black;
 	 text-decoration: none;
      cursor: pointer;
 }
-/* Modal Content */
-.modal3 .modal3-content {
+/* Modal Content
+.modaleMentor3 .modal3-content {
 	padding-top: 20px;
 	width: 100%; 
 	align-items: center; 
@@ -580,36 +594,47 @@ background-color: #1D6154;
 	border: 1px solid #888;
 	border: none;
 	border-radius: 10px;
-	/* margin-left: 30px; */
-} 
-.modal3 .modal3-content form{
+	/* margin-left: 30px; 
+} */
+
+
+ 
+
+.modaleMentor3 form{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100%;
+	/* width: 700px; */
 	align-items: center;
+	padding: 10px 60px 25px 60px; 
 }
-/* .image-preview-container{
-	
-} */
-.modal3 .modal3-content form .modal3contener{
-	/* position: relative;
-    display: inline-block; */
-	display: flex;
-	flex-direction: row;
-	width: 80%;
+.modaleMentor3 form .modal3contener{
+	/* position: relative; */
+    display: flex;
+	width: 100%;
 	flex-direction: column;
 	background-color: #E8F1F6;
 	border-radius: 3px;
 	justify-items: center;
 	align-items: center;
-	/* padding: 20px 0; */
-} /*
+	/* padding: 30px 0;  */
+
+
+	/* display: flex;
+	flex-direction: row;
+	width: 100%;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	justify-items: center;
+	align-items: center; */
+	/* margin: 5px 60px 10px 60px;  */
+}
 /* Styles pour le conteneur du champ de fichier et du bouton */
 /* .file-input-container {
     position: relative;
     display: inline-block;
-} */
+} 
 
 /* Styles pour le bouton personnalisé */
 /* .btn-ajout {
@@ -651,7 +676,37 @@ background-color: #1D6154;
 	display: block;
 	/* bottom: 50%;*/
 } 
-.modal3 .modal3-content form .titre-categorie2{
+
+
+
+form > * {
+	text-align: center;
+} */
+#image-preview-container{
+	bottom: 50%;
+}
+.modaleMentor3 form .titre-categorie2{
+	width: 100%;
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* padding: 5px 60px 10px 60px;  */
+}
+.modaleMentor3  .titre-categorie2 input{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modaleMentor3  .titre-categorie2 label {
+	margin: 2em 0 1em 0;
+}
+
+
+
+/* .modaleMentor3 .modal3-content form .titre-categorie2{
 	width: 80%;
 	text-align: left;
 	margin-top:30px;
@@ -660,15 +715,15 @@ background-color: #1D6154;
 	justify-content: center;
 	
 }
-.modal3 .titre-categorie2 input{
+.modaleMentor3 .titre-categorie2 input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modal3 .titre-categorie2 label {
+.modaleMentor3 .titre-categorie2 label {
 	margin: 2em 0 1em 0;
-}
+} */
 /* .modal3 .modal3contener .btn-ajout{
 	display: flex;
 	flex-direction: column;
@@ -683,7 +738,36 @@ background-color: #1D6154;
 	border: none;
 	border-radius: 60px ;
 } */
-.modal3-content .trait3{
+
+
+
+
+.trait3{
+	margin-top: 50px;
+    height: 2px;
+	justify-content: center;
+	width: 100%;
+    background-color: #B3B3B3;
+	margin: 50px ; 
+}
+  .envoyer{
+	display: flex;
+	font-family: 'Syne';
+	font-size: 18px;
+	margin: 10px auto 30px auto;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+	width: 340px;
+	padding: 20px 20px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	color: white;
+	background-color: #1D6154;
+}
+
+/* .modal3-content .trait3{
 	margin-top: 50px;
     height: 2px;
 	justify-content: center;
@@ -708,7 +792,7 @@ background-color: #1D6154;
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
-}
+} */
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
