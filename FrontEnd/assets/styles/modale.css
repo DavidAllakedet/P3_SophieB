@@ -362,16 +362,23 @@ background-color: #1D6154;
 	align-items: center;
 	padding: 10px 60px 25px 60px; 
 }
-.modaleMentor2 form .modal2contener{
+.bleu{
+	background-color: #E8F1F6;
+	width: 100%;
+	padding: 20px 0;
+}
+.modaleMentor2  .modal2contener{
 	position: relative;
     display: inline-block;
 	width: 100%;
 	flex-direction: column;
-	background-color: #E8F1F6;
+	color:#444444;
+	/* background-color: #E8F1F6; */
 	border-radius: 3px;
 	justify-items: center;
 	align-items: center;
-	padding: 30px 0;
+	/* padding: 30px 0; */
+	text-align: center;
 	/* margin: 5px 60px 10px 60px;  */
 }
 /* Styles pour le bouton personnalisé */
@@ -389,26 +396,34 @@ background-color: #1D6154;
 }
 
 /* Styles pour l'élément d'entrée de fichier masqué */
-.file-input {
-    position: absolute;
+.modaleMentor2 form .modal2contener .file-input {
+	display: flex;
+	justify-content: center;
+    /* position: absolute; 
     top: 0;
-    left: 0;
-    /* width: 100%; */
-    height: 100%;
-    opacity: 0;
+    left: 0;  */
+    /* width: 100%; 
+    height: 100%;  */
+    opacity: 0; 
     cursor: pointer;
 }
-.modaleMentor2 .modal2contener .fa-image {
+.modaleMentor2 form .modal2contener .image-preview {
+	align-self: center;
 	font-size: 100px;
-	color: #CBD6DC;
+	color: #CBD6DC; 
 	align-items: center;
-}
-  form > * {
-	text-align: center;
-} */
+	justify-content: center;
+	
+}   
+ 
 #image-preview-container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	bottom: 50%;
-}
+} 
+
 .modaleMentor2 form .titre-categorie{
 	width: 100%;
 	text-align: left;
@@ -418,16 +433,26 @@ background-color: #1D6154;
 	justify-content: center;
 	/* padding: 5px 60px 10px 60px;  */
 }
+/* image preview */
+.modaleMentor2 form .modal2contener .image-preview-container{
+
+	bottom: 50%;
+	/* bottom: 50%;*/
+} 
+
+
+
 .modaleMentor2  .titre-categorie input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
+
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 .modaleMentor2  .titre-categorie label {
 	margin: 2em 0 1em 0;
 }
-.modaleMentor2  .modal2contener .btn-ajout{
+.modaleMentor2 .btn-ajout{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -449,7 +474,7 @@ background-color: #1D6154;
     background-color: #B3B3B3;
 	margin: 50px ; 
 }
-  .thirdStepModalBtn{
+.envoyer{
 	display: flex;
 	font-family: 'Syne';
 	font-size: 18px;
@@ -465,18 +490,18 @@ background-color: #1D6154;
 	color: white;
 	background-color: #A7A7A7;
 }
-/********* modale 3 css ********/
+/* ******** modale 3 css *******
 .modaleMentor3 {
-	/* display: none;  */
+	/* display: none;  
 	position: absolute; 
 	align-items: center;
 	justify-content: center;
 	width: 700px; 
 	top: 70%;
-	/* left: 32%; */
+	/* left: 32%; 
 	border: none;
 	background-color: #fefefe;
-	/* padding: 10px 25px 25px 25px;  */
+	/* padding: 10px 25px 25px 25px;  
 }
 .modaleMentor3  h1{
 	font-family: Work Sans;
@@ -493,7 +518,7 @@ background-color: #1D6154;
 	justify-content: space-between;
 	font-size: x-large;
 	background-color: none;
-	/* margin: 0 -50px; */
+	/* margin: 0 -50px; 
 }
 .modaleMentor3 .icones2 button{
 	background-color: white;
@@ -513,12 +538,12 @@ background-color: #1D6154;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* width: 700px; */
+	/* width: 700px; 
 	align-items: center;
 	padding: 10px 60px 25px 60px; 
 }
 .modaleMentor3 form .modal3contener{
-	/* position: relative; */
+	/* position: relative; 
     display: flex;
 	width: 100%;
 	flex-direction: column;
@@ -526,31 +551,31 @@ background-color: #1D6154;
 	border-radius: 3px;
 	justify-items: center;
 	align-items: center;
-	/* padding: 30px 0;  */
+	/* padding: 30px 0;  
 }
 .modal3-content > * {
 	text-align: center;
 }
 .modal3contener .image-preview-container{
 	display: block;
-	/* bottom: 50%;*/
+	/* bottom: 50%;
 } 
 form > * {
 	text-align: center;
-} */
+} 
 #image-preview-container{
 	bottom: 50%;
 }
-.modaleMentor3 form .titre-categorie2{
+/* .modaleMentor3 form .titre-categorie2{
 	width: 100%;
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* padding: 5px 60px 10px 60px;  */
+	/* padding: 5px 60px 10px 60px;  
 }
-.modaleMentor3  .titre-categorie2 input{
+/* .modaleMentor3  .titre-categorie2 input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -589,9 +614,9 @@ footer nav ul {
 	height: 60px;
 	background-color: white;
 	background-size: 100px;
-	margin: 0;
+	margin: 0; *
 
-}
-
+} */
+ 
 
 
