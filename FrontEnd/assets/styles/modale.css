@@ -358,7 +358,6 @@ background-color: #1D6154;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* width: 700px; */
 	align-items: center;
 	padding: 10px 60px 25px 60px; 
 }
@@ -374,9 +373,7 @@ background-color: #1D6154;
 	border-radius: 3px;
 	justify-items: center;
 	align-items: center;
-	
 	text-align: center;
-	/* margin: 5px 60px 10px 60px;  */
 }
 .modale2  form .image-Preview-C .image-preview{
 	position: relative;
@@ -391,8 +388,6 @@ background-color: #1D6154;
 }
 .modale2  form .image-Preview-C .imageP{
 	align-self: center;
-	/* width: 100px;
-	height: 200px; */
 	color: #CBD6DC; 
 	align-items: center;
 	justify-content: center;

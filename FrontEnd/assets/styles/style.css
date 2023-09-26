@@ -72,10 +72,7 @@ header nav ul li a{
 header nav ul li a:hover{
 	font-weight: bold;
 }
-/* nav ul li a.active {
-	font-weight: bold; /* Rendre le titre en gras 
-	color: black;
-  } */
+
 section {
 	margin: 50px 100px;
 }

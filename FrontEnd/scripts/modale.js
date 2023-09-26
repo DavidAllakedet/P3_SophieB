@@ -133,6 +133,8 @@ closeButton2.addEventListener('click', () => {
     }
   }
 
+  //********* Partie de code pour poster les nouveaux works *********
+
  // Sélectionnez le formulaire et ajoutez un écouteur d'événements pour la soumission
 const form = document.getElementById('FormAjoutWork');
 form.addEventListener('submit', function (event) {
@@ -157,7 +159,7 @@ form.addEventListener('submit', function (event) {
 
     // Récupérez le token
     const mon_token = localStorage.getItem('mon_token');
-console.log(mon_token)
+    console.log(mon_token)
     // Envoi des données au serveur
     fetch('http://localhost:5678/api/works', {   
         method: 'POST',
@@ -188,6 +190,7 @@ console.log(mon_token)
 });
 
 
+// ****** Partie de code pour previsualisation de li'image ********
 
 const fileInput = document.getElementById('btn-Ajout');
 const titreInput = document.getElementById('titre');
