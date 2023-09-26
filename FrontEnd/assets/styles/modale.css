@@ -150,7 +150,7 @@ li:hover {
 }
 
 /************   la modale  *********/
-.modaleMentor {
+.modale {
     /* display: none;  */
     position: absolute; 
     align-items: center;
@@ -162,7 +162,7 @@ li:hover {
 	border-radius: 10px;
     background-color:white; 
     }
-    .modaleMentor h1 {
+    .modale h1 {
 		font-family: Work Sans;
 		text-align: center;
 		margin-bottom: 1em;
@@ -245,7 +245,7 @@ li:hover {
     background-color: black;
     
 }
-.modaleMentor .trait{
+.modale .trait{
     margin-top: 40px;
     height: 2px;
 	justify-content: center;
@@ -311,7 +311,7 @@ background-color: #1D6154;
 	border: #1D6154 solid;	
 }
 /********* modale 2 css ********/
-.modaleMentor2 {
+.modale2 {
 	/* display: none;  */
 	position: absolute; 
 	align-items: center;
@@ -323,13 +323,13 @@ background-color: #1D6154;
 	background-color: #fefefe;
 	/* padding: 10px 25px 25px 25px;  */
 }
-.modaleMentor2 h1{
+.modale2 h1{
 	font-family: Work Sans;
 	text-align: center;
 	margin-bottom: 1em;
 	color: black;
 }
-.modaleMentor2 .icones{
+.modale2 .icones{
 	opacity: 0;
 	padding-top: 20px;
 	width: 700px;
@@ -340,7 +340,7 @@ background-color: #1D6154;
 	background-color: none;
 	/* margin: 0 -50px; */
 }
-.modaleMentor2 .icones button{
+.modale2 .icones button{
 	background-color: white;
 	border: none;
 	font-weight: bolder ;
@@ -354,7 +354,7 @@ background-color: #1D6154;
 	 text-decoration: none;
      cursor: pointer;
 }
-.modaleMentor2 form{
+.modale2 form{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -362,25 +362,44 @@ background-color: #1D6154;
 	align-items: center;
 	padding: 10px 60px 25px 60px; 
 }
-.bleu{
-	background-color: #E8F1F6;
+
+.modale2  form .image-Preview-C{
+	position: relative;
+    display: flex;
+	flex-direction: column;
 	width: 100%;
-	padding: 20px 0;
+	flex-direction: column;
+	color:#444444;
+	background-color: #E8F1F6; 
+	border-radius: 3px;
+	justify-items: center;
+	align-items: center;
+	
+	text-align: center;
+	/* margin: 5px 60px 10px 60px;  */
 }
-.modaleMentor2  .modal2contener{
+.modale2  form .image-Preview-C .image-preview{
 	position: relative;
     display: inline-block;
 	width: 100%;
 	flex-direction: column;
-	color:#444444;
-	/* background-color: #E8F1F6; */
-	border-radius: 3px;
+	
 	justify-items: center;
 	align-items: center;
-	/* padding: 30px 0; */
+	padding:20px 0;
 	text-align: center;
-	/* margin: 5px 60px 10px 60px;  */
 }
+.modale2  form .image-Preview-C .imageP{
+	align-self: center;
+	/* width: 100px;
+	height: 200px; */
+	color: #CBD6DC; 
+	align-items: center;
+	justify-content: center;
+
+	
+}
+
 /* Styles pour le bouton personnalisé */
 .secondStepModalBtn {
     display: inline-block;
@@ -394,37 +413,25 @@ background-color: #1D6154;
 	border: none;
 	border-radius: 60px ;
 }
-
-/* Styles pour l'élément d'entrée de fichier masqué */
-.modaleMentor2 form .modal2contener .file-input {
-	display: flex;
-	justify-content: center;
+.modale2 form .image-Preview-C .fa-image{
+	font-size: 100px;
+	color: #CBD6DC;
+	align-items: center;
+}
+.modale2 form .image-Preview-C .file-input {
+	/* display: flex;
+	justify-content: center; */
     /* position: absolute; 
     top: 0;
     left: 0;  */
     /* width: 100%; 
     height: 100%;  */
-    opacity: 0; 
+	display: none;
+    /* opacity: 0;  */
     cursor: pointer;
 }
-.modaleMentor2 form .modal2contener .image-preview {
-	align-self: center;
-	font-size: 100px;
-	color: #CBD6DC; 
-	align-items: center;
-	justify-content: center;
-	
-}   
- 
-#image-preview-container{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	bottom: 50%;
-} 
-
-.modaleMentor2 form .titre-categorie{
+/* Styles pour l'élément d'entrée de fichier masqué */
+.modale2 form .titre-categorie{
 	width: 100%;
 	text-align: left;
 	margin-top:30px;
@@ -433,26 +440,54 @@ background-color: #1D6154;
 	justify-content: center;
 	/* padding: 5px 60px 10px 60px;  */
 }
-/* image preview */
-.modaleMentor2 form .modal2contener .image-preview-container{
-
-	bottom: 50%;
-	/* bottom: 50%;*/
-} 
 
 
-
-.modaleMentor2  .titre-categorie input{
+.modale2  .titre-categorie input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modaleMentor2  .titre-categorie label {
+.modale2  .titre-categorie .select-option{
+	display: flex;
+	position: relative;
+	justify-content: center;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+    
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.modale2  .titre-categorie select{
+	height: 50px;
+	border: none;
+	appearance: none;
+    width: 100%;
+	
+}
+.modale2 .titre-categorie .flech-bas-container{
+	width: 50px;
+	height: 100%;
+	display: flex;
+	position: absolute;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+	
+	
+}
+.flech-bas-container .fa-chevron-down{
+	border: none;
+	color: #B1663C;
+	font-weight: 20px;
+	font-size: 10px;
+}
+
+.modale2  .titre-categorie label {
 	margin: 2em 0 1em 0;
 }
-.modaleMentor2 .btn-ajout{
+.modale2 .btn-ajout{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -490,133 +525,3 @@ background-color: #1D6154;
 	color: white;
 	background-color: #A7A7A7;
 }
-/* ******** modale 3 css *******
-.modaleMentor3 {
-	/* display: none;  
-	position: absolute; 
-	align-items: center;
-	justify-content: center;
-	width: 700px; 
-	top: 70%;
-	/* left: 32%; 
-	border: none;
-	background-color: #fefefe;
-	/* padding: 10px 25px 25px 25px;  
-}
-.modaleMentor3  h1{
-	font-family: Work Sans;
-	text-align: center;
-	margin-bottom: 1em;
-	color: black;
-}
-.modaleMentor3 .icones2{
-	opacity: 0;
-	padding-top: 20px;
-	width: 700px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	font-size: x-large;
-	background-color: none;
-	/* margin: 0 -50px; 
-}
-.modaleMentor3 .icones2 button{
-	background-color: white;
-	border: none;
-	font-weight: bolder ;
-	font-size: x-large;
-	padding: 0 20px;
-}
-.icones2:hover,
-.icones2:focus {
-	opacity: 100%;
-     color: black;
-	 text-decoration: none;
-     cursor: pointer;
-}
-.modaleMentor3 form{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* width: 700px; 
-	align-items: center;
-	padding: 10px 60px 25px 60px; 
-}
-.modaleMentor3 form .modal3contener{
-	/* position: relative; 
-    display: flex;
-	width: 100%;
-	flex-direction: column;
-	background-color: #E8F1F6;
-	border-radius: 3px;
-	justify-items: center;
-	align-items: center;
-	/* padding: 30px 0;  
-}
-.modal3-content > * {
-	text-align: center;
-}
-.modal3contener .image-preview-container{
-	display: block;
-	/* bottom: 50%;
-} 
-form > * {
-	text-align: center;
-} 
-#image-preview-container{
-	bottom: 50%;
-}
-/* .modaleMentor3 form .titre-categorie2{
-	width: 100%;
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* padding: 5px 60px 10px 60px;  
-}
-/* .modaleMentor3  .titre-categorie2 input{
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-.modaleMentor3  .titre-categorie2 label {
-	margin: 2em 0 1em 0;
-}
-.trait3{
-	margin-top: 50px;
-    height: 2px;
-	justify-content: center;
-	width: 100%;
-    background-color: #B3B3B3;
-	margin: 50px ; 
-}
-  .envoyer{
-	display: flex;
-	font-family: 'Syne';
-	font-size: 18px;
-	margin: 10px auto 30px auto;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-	width: 340px;
-	padding: 20px 20px;
-	text-align: center;
-	border-radius: 60px ;
-	border: none;
-	color: white;
-	background-color: #1D6154;
-}
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	height: 60px;
-	background-color: white;
-	background-size: 100px;
-	margin: 0; *
-
-} */
- 
-
-

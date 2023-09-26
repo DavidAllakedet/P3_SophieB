@@ -1,12 +1,10 @@
 // Boutons pour ouvrir les modales
 const firstStepModalBtn = document.getElementById('firstStepModalBtn');
 const secondStepModalBtn = document.getElementById('secondStepModalBtn');
-// const thirdStepModalBtn = document.getElementById('thirdStepModalBtn');
 
 // Sélecteur Modales
 const firstStepModal = document.getElementById('firstStepModal');
 const secondStepModal = document.getElementById('secondStepModal');
-// const thirdStepModal = document.getElementById('thirdStepModal');
 
 // On écoute le click sur le bouton pour ouvrir la modale
 firstStepModalBtn.addEventListener('click', () => {
@@ -21,11 +19,6 @@ secondStepModalBtn.addEventListener('click', () => {
   secondStepModal.showModal();
 });
 
-// thirdStepModalBtn.addEventListener('click', () => {
-//   secondStepModal.close();
-//   thirdStepModal.showModal();
-// });
-
 // On écoute le click sur la fenêtre si la modale est ouverte et que l'élément cliqué est différent de la fenêtre alors on ferme la modale
 window.addEventListener('click', (e) => {
   if ((e.target == firstStepModal && firstStepModal.open) || (e.target == secondStepModal && secondStepModal.open)) {
@@ -34,12 +27,24 @@ window.addEventListener('click', (e) => {
   }
 });
 
-// window.addEventListener('click', (e) => {
-//   if ((e.target == secondStepModal && secondStepModal.open) || (e.target == thirdStepModal && thirdStepModal.open)) {
-//     secondStepModal.close();
-//     thirdStepModal.close();
-//   }
-// });
+//Recupere le bouton de croix pour fermer la modale
+const closeButton = document.getElementById('close');
+const closeButton2 = document.getElementById('close2') 
+
+// on ecoute le click sur la croix pour fermer la modale 1
+closeButton.addEventListener('click', () => {
+  // Fermez le dialogue
+  firstStepModal.close();
+});
+
+// on ecoute le click sur la croix pour fermer la modale 2
+closeButton2.addEventListener('click', () => {
+  // Fermez le dialogue
+  secondStepModal.close();
+});
+
+
+
 
  // Fonction pour afficher les œuvres dans la section "gallery"
  async function callApi(){
@@ -98,31 +103,7 @@ window.addEventListener('click', (e) => {
        supprimerWork()
     })
 
-// Sélectionnez l'élément d'entrée de fichier et l'élément de prévisualisation d'image
-const fileInput = document.getElementById('btn-Ajout');
-const imagePreview = document.getElementById('image-preview');
-
-//Écoutez l'événement de changement de fichier sur l'élément d'entrée de fichier
-fileInput.addEventListener('change', function () {
-    const file = fileInput.files[0]; // Obtenez le fichier sélectionné
-console.log(fileInput)
-
-// fileInput.onchange = function(){
-//   imagePreview.src URL.createObjectURL(fileInput.files[0]);
-// }
-
-    if (file) {
-        // Créez un objet URL pour le fichier
-        const imageURL = URL.createObjectURL(file);
-
-        // Affichez l'image prévisualisée dans l'élément img
-        imagePreview.src = imageURL;
-        imagePreview.style.display = 'block'; // Montrez l'élément d'image
-    } else {
-        // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
-        imagePreview.style.display = 'none';
-    }
-});
+// *************** .       ****************
       const boutonItrash = document.createElement("i")
       boutonItrash.classList.add("fa-solid") 
       boutonItrash.classList.add("fa-trash-can")
@@ -152,45 +133,89 @@ console.log(fileInput)
     }
   }
 
-  
-  document.getElementById("FormAjoutWork").addEventListener("submit", function (e) {
-    e.preventDefault(); // Empêche le comportement par défaut du formulaire
-  console.log("blabla")
-    const formData = new FormData(document.getElementById("FormAjoutWork"));
-    const token = localStorage.getItem("mon_token");
-  
-    // Récupérez le fichier sélectionné par l'utilisateur
-    const file = formData.get("image");
-  
-    // Vérifiez si un fichier a été sélectionné
+ // Sélectionnez le formulaire et ajoutez un écouteur d'événements pour la soumission
+const form = document.getElementById('FormAjoutWork');
+form.addEventListener('submit', function (event) {
+    event.preventDefault(); // Empêche la soumission par défaut du formulaire
+
+    // Récupérez les valeurs des champs du formulaire
+    const titre = document.getElementById('titre').value;
+    const categorie = document.getElementById('categorie').value;
+    const image = document.getElementById('btn-Ajout').files[0];
+
+    // Validation des champs
+    if (!titre || !categorie || !image) {
+        alert('Veuillez remplir tous les champs du formulaire.');
+        return; // Arrêtez la soumission si des champs sont manquants
+    }
+
+    // Créez un objet FormData pour envoyer les données du formulaire
+    const formData = new FormData();
+    formData.append('titre', titre);
+    formData.append('categorie', categorie);
+    formData.append('image', image);
+
+    // Récupérez le token
+    const mon_token = localStorage.getItem('mon_token');
+console.log(mon_token)
+    // Envoi des données au serveur
+    fetch('http://localhost:5678/api/works', {   
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Authorization': `Bearer ${mon_token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Une erreur s\'est produite lors de la soumission du formulaire.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Traitez la réponse du serveur ici (par exemple, affichez un message de succès)
+        console.log(data);
+        alert('Work ajouté avec succès');
+        // Réinitialisez le formulaire
+        form.reset();
+        // Réinitialisez l'aperçu de l'image
+        document.getElementById('imageP').src = '';
+    })
+    .catch(error => {
+        console.error('Erreur lors de l\'envoi des données au serveur:', error);
+        alert('Une erreur s\'est produite lors de la soumission du formulaire.');
+    });
+});
+
+
+
+const fileInput = document.getElementById('btn-Ajout');
+const titreInput = document.getElementById('titre');
+const categorieInput = document.getElementById('categorie');
+const imageP = document.getElementById('imageP'); // Sélectionnez l'élément img pour prévisualiser l'image
+
+fileInput.addEventListener('change', function () {
+    const file = fileInput.files[0]; // Obtenez le fichier sélectionné
+
     if (file) {
         // Créez un objet URL pour le fichier
         const imageURL = URL.createObjectURL(file);
-  
-        // Affichez l'image prévisualisée dans l'élément img
+
+        // Affichez l'image prévisualisée dans l'élément img du bouton
+        imageP.src = imageURL;
+        imageP.style.display = 'block'; // Montrez l'élément d'image
+
+        // Cachez la div image-preview
         const imagePreview = document.getElementById('image-preview');
-        imagePreview.src = imageURL;
-        imagePreview.style.display = 'block'; // Montrez l'élément d'image
-  
-        // Envoyez le formulaire avec l'image
-        fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer " + token
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Traitez la réponse du serveur ici
-            console.log(data);
-        })
-        .catch(error => {
-            console.error("Erreur lors de l'envoi de la requête POST : ", error);
-        });
+        imagePreview.style.display = 'none';
     } else {
-        // Gérez le cas où aucun fichier n'a été sélectionné
-        console.error("Aucun fichier sélectionné.");
+        // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
+        imagePreview.style.display = 'none';
+
+        // Affichez à nouveau la div image-preview
+        const imagePreview = document.getElementById('image-preview');
+        imagePreview.style.display = 'block';
     }
-  });
- 
+});
+
+

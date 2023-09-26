@@ -45,10 +45,10 @@
 				<h2>Mes Projets</h2>
 				<!-- Trigger/Open The Modal -->
 				<button id="firstStepModalBtn"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
-				<dialog id="firstStepModal" class="modaleMentor" close>
+				<dialog id="firstStepModal" class="modale" close>
 					<!--Modal content -->
 						<!-- <div class="modal-content"> -->
-							<div class="close">
+							<div id="close" class="close">
 								<i></i>
 								<button class="close1">&times;</button>
 							</div>
@@ -64,75 +64,54 @@
 				</dialog>
 				<!-- Trigger/Open The Modal 2 -->
 				<!-- The Modal 2 -->
-				<dialog id="secondStepModal" class="modaleMentor2" close>
+				<dialog id="secondStepModal" class="modale2" close>
 					<!--Modal content -->
-						<!-- <div class="modal-content"> -->
-							<div class="icones">
-								<button onclick="togglemodal2" class="FaLeft">
-									<i class="fa-solid fa-arrow-left"></i>
-								</button>
-								<button class="close2">
-									<span class="spanclose2">&times;</span>
-								</button>
-							</div>
-							<h1>Ajout Photo</h1>
-							<form id="FormAjoutWork"  enctype="multipart/form-data" method="dialog">
-								<div class="bleu">
-									<div id="image-preview-container" class="image-preview-contener">
-										<img id="image-preview" class="image-preview" src="../FrontEnd/assets/images/icone-image.png" alt="Aperçu de l'image" style=" max-width: 50%; max-height: 100px;">
-									</div>  
-									<div id="modal2contener" class="modal2contener">
-										<!-- <img id="icone-image" class="icone-image" src="../FrontEnd/assets/images/icone-image.png" alt="Aperçu de l'image" style=" max-width:50%; max-height: 100px;">
-										-->
-						
-										<!-- L'élément d'entrée de fichier est masqué (visibility:hidden) -->
-										<input id="btn-Ajout" class="file-input" type="file" accept="image/jpeg, image/png, image/jpg" name="image" >
-										<!-- Bouton personnalisé -->
-										<label for="btn-Ajout" class="btn-ajout">+ Ajouter Photo</label>
-										<p>jpg, png : 4mo max</p>
-									</div>
-								</div>	
+						<div class="icones">
+							<button onclick="togglemodal2" class="FaLeft">
+								<i class="fa-solid fa-arrow-left"></i>
+							</button>
+							<button id="close2" class="close2">
+								<span class="spanclose2">&times;</span>
+							</button>
+						</div>
+						<h1>Ajout Photo</h1>
+						<form id="FormAjoutWork"  enctype="multipart/form-data" method="dialog">
+							<div class="image-Preview-C">
+								<input id="btn-Ajout" class="file-input" type="file" accept="image/jpeg, image/png, image/jpg" name="image" >
+								<img id="imageP" class="imageP" src="#" alt="" style=" max-width: 100%; max-height: 200px;">
+								<div id="image-preview" class="image-preview">
+									<i class="fa-regular fa-image"></i>
 									
-								<div class="titre-categorie">
-									<label for="titre">Titre</label>
-									<input type="text" id="titre" name="titre" />
-									<label for="categorie">Categorie</label>
-									<input type="text" id="categorie" name="categorie" />
-								</div>
-								<div class="trait2"></div>
-								<button id="envoyer" class="envoyer" type="submit" >Valider</button>
-								<!-- <button id="thirdStepModalBtn" class="thirdStepModalBtn" type="button" >Valider</button> -->
-							</form>	
-				</dialog>
-                <!-- Trigger/Open The Modal 3-->
-				<!-- <dialog id="thirdStepModal" class="modaleMentor3" close> -->
-					<!--Modal content -->
-						<!-- <div class="modal-content"> -->
-							<!-- <div class="icones2">
-								<button onclick="togglemodal2" class="FaLeft2">
-									<i class="fa-solid fa-arrow-left"></i>
-								</button>
-								<button class="close3">
-									<span class="spanclose3">&times;</span>
-								</button>
+									<!-- L'élément d'entrée de fichier est masqué (visibility:hidden) -->
+									
+									<!-- Bouton personnalisé -->
+									<label for="btn-Ajout" class="btn-ajout">+ Ajouter Photo</label>
+									<p>jpg, png : 4mo max</p>
+								</div>  
 							</div>
-							<h1>Galerie Photos</h1>
-							<form id="FormAjoutWork2" enctype="multipart/form-data" method="dialog">
-								<div class="modal3contener">
-									<div id="image-preview-container" class="image-preview-contener">
-										<img id="image-preview" src="#" alt="Aperçu de l'image" style=" max-width: 100%; max-height: 200px;">
+								
+							<div class="titre-categorie">
+								<label for="titre">Titre</label>
+								<input type="text" id="titre" name="titre" />
+								<label for="categorie">Categorie</label>
+								<div class="select-option">
+									<select name="categorie" id="categorie">
+										<option value="" disabled selected></option>
+										<option value="objets">Objets</option>
+										<option value="appartements">Appartements</option>
+										<option value="hotels_restaurants">Hôtels & restaurants</option>
+									</select>
+									<div class="flech-bas-container">
+										<i class="fa-solid fa-chevron-down"></i>
 									</div>
-								</div> 
-								<div class="titre-categorie2">
-									<label for="titre2">Titre</label>
-									<input type="text" id="titre2" name="titre2" />
-									<label for="categorie2">Categorie</label>
-									<input type="text" id="categorie2" name="categorie2" />
 								</div>
-								<div class="trait3"></div>
-								<button id="envoyer" class="envoyer" type="submit" >Valider</button>
-							</form>	
-				</dialog> -->
+								<!-- <input type="text" id="categorie" name="categorie" /> -->
+							</div>
+							<div class="trait2"></div>
+							<button id="envoyer" class="envoyer" type="submit" >Valider</button>
+						</form>	
+				</dialog>
+                
 			</div>	
 			<div class="div-filtre">
 				<button class="btn-all" onClick="filterWorks(0)">Tous</button>
