@@ -103,7 +103,7 @@ closeButton2.addEventListener('click', () => {
        supprimerWork()
     })
 
-// *************** .       ****************
+// *************** .      ****************
       const boutonItrash = document.createElement("i")
       boutonItrash.classList.add("fa-solid") 
       boutonItrash.classList.add("fa-trash-can")
@@ -145,6 +145,11 @@ form.addEventListener('submit', function (event) {
     const categorie = document.getElementById('categorie').value;
     const image = document.getElementById('btn-Ajout').files[0];
 
+
+    console.log(titre)
+    console.log(categorie)
+    console.log(image)
+
     // Validation des champs
     if (!titre || !categorie || !image) {
         alert('Veuillez remplir tous les champs du formulaire.');
@@ -153,22 +158,29 @@ form.addEventListener('submit', function (event) {
 
     // Créez un objet FormData pour envoyer les données du formulaire
     const formData = new FormData();
-    formData.append('titre', titre);
-    formData.append('categorie', categorie);
+    formData.append('title', titre);
+    formData.append('category', categorie);
     formData.append('image', image);
 
     // Récupérez le token
     const mon_token = localStorage.getItem('mon_token');
     console.log(mon_token)
+    console.log(formData)
     // Envoi des données au serveur
     fetch('http://localhost:5678/api/works', {   
         method: 'POST',
         body: formData,
+
         headers: {
-            'Authorization': `Bearer ${mon_token}`
+          // 'Content-Type': `multipart/form-data`,
+        
+          // 'multipart/form-data; boundary=---------------------------123456789012345678901234567890',
+
+          'Authorization': `Bearer ${mon_token}`
         }
     })
     .then(response => {
+      console.log(response)
         if (!response.ok) {
             throw new Error('Une erreur s\'est produite lors de la soumission du formulaire.');
         }

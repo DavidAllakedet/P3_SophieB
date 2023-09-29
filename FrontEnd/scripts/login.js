@@ -25,7 +25,7 @@ form.addEventListener("submit", function (event) {
         const response = await promise.json();
         const token = response.token;
         localStorage.setItem("mon_token", token);
-        window.location.href = "/FrontEnd/index.html"
+        window.location.href = "/index.html"
     } else {
         alert("Erreur dans l'identifiant ou le mot de passe");
         throw new Error("Erreur dans l’identifiant ou le mot de passe")
