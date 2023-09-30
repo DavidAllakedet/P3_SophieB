@@ -31,7 +31,7 @@ window.addEventListener('click', (e) => {
 const closeButton = document.getElementById('close');
 const closeButton2 = document.getElementById('close2') 
 
-// on ecoute le click sur la croix pour fermer la modale 1
+// on ecoute le click sur la croix pour fermer la modale1
 closeButton.addEventListener('click', () => {
   // Fermez le dialogue
   firstStepModal.close();
@@ -99,9 +99,12 @@ closeButton2.addEventListener('click', () => {
            supprimerWork()
            }
          }
+         callApi()
+         
        }
        supprimerWork()
     })
+    
 
 // *************** .      ****************
       const boutonItrash = document.createElement("i")
@@ -137,6 +140,8 @@ closeButton2.addEventListener('click', () => {
 
  // Sélectionnez le formulaire et ajoutez un écouteur d'événements pour la soumission
 const form = document.getElementById('FormAjoutWork');
+const BtnValider = document.getElementById('valider');
+
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // Empêche la soumission par défaut du formulaire
 
@@ -179,6 +184,7 @@ form.addEventListener('submit', function (event) {
           'Authorization': `Bearer ${mon_token}`
         }
     })
+    
     .then(response => {
       console.log(response)
         if (!response.ok) {
@@ -190,15 +196,23 @@ form.addEventListener('submit', function (event) {
         // Traitez la réponse du serveur ici (par exemple, affichez un message de succès)
         console.log(data);
         alert('Work ajouté avec succès');
+
+// Fermez la modal après l'ajout du work
+secondStepModal.close();
+
         // Réinitialisez le formulaire
         form.reset();
         // Réinitialisez l'aperçu de l'image
         document.getElementById('imageP').src = '';
+
+        // Actualisez la page d'accueil
+        window.location.reload();
     })
     .catch(error => {
         console.error('Erreur lors de l\'envoi des données au serveur:', error);
         alert('Une erreur s\'est produite lors de la soumission du formulaire.');
     });
+    callApi()
 });
 
 
@@ -233,4 +247,37 @@ fileInput.addEventListener('change', function () {
     }
 });
 
+// Sélectionnez les éléments d'entrée et le bouton
+// const titreInput = document.getElementById('titre');
+// const categorieInput = document.getElementById('categorie');
+// const imageInput = document.getElementById('btn-Ajout');
+const submitButton = document.getElementById('envoyer');
 
+// Ajoutez des écouteurs d'événements pour les champs du formulaire
+titreInput.addEventListener('input', checkFormFields);
+categorieInput.addEventListener('input', checkFormFields);
+imageInput.addEventListener('change', checkFormFields);
+
+// Fonction pour vérifier si tous les champs sont remplis
+function checkFormFields() {
+    const titre = titreInput.value;
+    const categorie = categorieInput.value;
+    const image = fileInput.files[0];
+
+    if (titre && categorie && image) {
+        // Si tous les champs sont remplis, activez le bouton Valider (passez en vert)
+        submitButton.style.backgroundColor = '#1D6154';
+        submitButton.style.color = 'white'
+        submitButton.disabled = false;
+    } else {
+        // Si un champ est manquant, désactivez le bouton Valider (passez en gris)
+        submitButton.style.backgroundColor = '#A7A7A7';
+        // submitButton.style.color = 'white'
+        submitButton.disabled = true;
+    }
+}
+
+// Appelez la fonction initiale pour vérifier l'état initial du formulaire
+checkFormFields();
+
+callApi()

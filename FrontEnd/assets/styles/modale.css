@@ -309,6 +309,10 @@ background-color: #1D6154;
 	border-radius: 60px ;
 	border: #1D6154 solid;	
 }
+#portfolio .div-filtre button.active {
+    background-color: #1D6154; /* Couleur verte pour les boutons actifs */
+    color: white; /* Couleur du texte en blanc */
+}
 /********* modale 2 css ********/
 .modale2 {
 	/* display: none;  */
@@ -516,6 +520,6 @@ background-color: #1D6154;
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
-	color: white;
-	background-color: #A7A7A7;
+	/* color: white;
+	background-color: #A7A7A7; */
 }
