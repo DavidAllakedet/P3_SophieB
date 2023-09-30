@@ -111,26 +111,26 @@ closeButton2.addEventListener('click', () => {
       boutonItrash.classList.add("fa-solid") 
       boutonItrash.classList.add("fa-trash-can")
 
-      const boutonDeplacement = document.createElement("button")
-      boutonDeplacement.classList.add("bouton-D")
+      // const boutonDeplacement = document.createElement("button")
+      // boutonDeplacement.classList.add("bouton-D")
        
-      const boutonImove = document.createElement("i")
-      boutonImove.classList.add("fa-solid") 
-      boutonImove.classList.add("fa-up-down-left-right")
+      // const boutonImove = document.createElement("i")
+      // boutonImove.classList.add("fa-solid") 
+      // // boutonImove.classList.add("fa-up-down-left-right")
 
       const imageElement = document.createElement("img");
       imageElement.src = article.imageUrl;
   
-      const nomElement = document.createElement("figcaption");
-      nomElement.innerText = "editer"
+      // const nomElement = document.createElement("figcaption");
+      // // nomElement.innerText = "editer"
   
       workElement.appendChild(divBouton)
       divBouton.appendChild(boutonDelete)
-      divBouton.appendChild(boutonDeplacement)
+      // divBouton.appendChild(boutonDeplacement)
       workElement.appendChild(imageElement);
-      workElement.appendChild(nomElement);
+      // workElement.appendChild(nomElement);
       boutonDelete.appendChild(boutonItrash)
-      boutonDeplacement.appendChild(boutonImove)
+      // boutonDeplacement.appendChild(boutonImove)
 
       lesProjets.appendChild(workElement);
     }
@@ -197,16 +197,30 @@ form.addEventListener('submit', function (event) {
         console.log(data);
         alert('Work ajouté avec succès');
 
-// Fermez la modal après l'ajout du work
-secondStepModal.close();
+        // Fermez la modale "secondStepModal"
+        secondStepModal.close();
 
-        // Réinitialisez le formulaire
-        form.reset();
-        // Réinitialisez l'aperçu de l'image
-        document.getElementById('imageP').src = '';
+        // Ouvrez la modale "firstStepModal"
+        firstStepModal.showModal();
+
+        callApi()
+
+         // Réinitialisez le formulaire
+         form.reset();
+        // // Réinitialisez l'aperçu de l'image
+        //Cacher l'élément d'image
+        document.getElementById('image-preview');
+        imageP.style.display = 'none'; 
+
+        //Montrer la div qui contient l'image
+        const imagePreview = document.getElementById('image-preview');
+        imagePreview.style.display = 'block';
 
         // Actualisez la page d'accueil
-        window.location.reload();
+        closeButton.addEventListener('click', () => {
+          // Actualisez la page d'accueil
+          window.location.reload();
+      });
     })
     .catch(error => {
         console.error('Erreur lors de l\'envoi des données au serveur:', error);
@@ -279,5 +293,22 @@ function checkFormFields() {
 
 // Appelez la fonction initiale pour vérifier l'état initial du formulaire
 checkFormFields();
+
+
+
+// Vérification côté client
+const isAuthenticated = localStorage.getItem("mon_token") !== null;
+
+// Sélectionnez le bouton "Modifier"
+const modifierButton = document.getElementById("firstStepModalBtn");
+
+if (!isAuthenticated) {
+    // Désactivez le bouton de modification
+    modifierButton.disabled = true;
+    // Vous pouvez également masquer la fonction de modification si nécessaire
+    // modifierButton.style.display = 'none';
+}
+
+// Autre code de gestion du bouton de modification...
 
 callApi()
