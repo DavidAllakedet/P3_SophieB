@@ -80,67 +80,80 @@ closeButton2.addEventListener('click', () => {
 
       boutonDelete.classList.add("bouton-S")
       
-      async function supprimerWork(workId) {
-        try {
-          const token = localStorage.getItem("mon_token");
-          const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
-            method: "DELETE",
-            headers: {
-              'Accept': '*/*',
-              "Authorization": "Bearer " + token
-            }
-          });
-      
-          if (response.ok) {
-            // Afficher une alerte pour indiquer que la suppression a réussi
-            alert(`Le work a été supprimée avec succès .`);
-      
-            // Mise à jour de la liste des images dans la page d'accueil
-            const gallery = document.querySelector(".gallery");
-            const imageToDelete = gallery.querySelector(`[data-id="${workId}"]`);
-            if (imageToDelete) {
-              imageToDelete.remove();
-            }
-      
-            // Rafraîchir la liste des works sur la page d'accueil sans fermer la modale
-            await callApi();
-      
-            // Appele  la fonction pour mettre à jour la liste des works sur la page d'accueil
-            updateAccueilWorks();
-          } else {
-            console.error("Erreur lors de la suppression du work");
-          }
-        } catch (error) {
-          console.error("Erreur lors de la suppression du work", error);
-        }
-      }
-      
-      // Écouteur d'événement pour le bouton de suppression dans la modale
-      boutonDelete.addEventListener("click", function () {
-        const workId = Number.isInteger(article.id) ? article.id : article.id.toString();
-        supprimerWork(workId);
-      });
-      
 
-      // Fonction pour mettre à jour la liste des works sur la page d'accueil
+
+
+   // Fonction pour mettre à jour la liste des works sur la page d'accueil
+   async function updateAccueilWorks() {
+    try {
+      // Effectuez un appel AJAX pour récupérer la liste des works
+      const response = await fetch('http://localhost:5678/api/works');
+  
+      if (response.ok) {
+        const updatedWorksList = await response.json();
+  
+        // Mettez à jour l'interface utilisateur avec la nouvelle liste des works
+        displayWorks(updatedWorksList);
+      } else {
+        throw new Error('Erreur lors de la récupération des works');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la liste des works sur la page d\'accueil', error);
+    }
+  }
+
+     // Supprimer un élément de la galerie par son ID
+    function removeWorkById(workId) {
+      const gallery = document.querySelector(".gallery");
+      const imageToDelete = gallery.querySelector(`[data-id="${workId}"]`);
       
-        async function updateAccueilWorks() {
+      if (imageToDelete) {
+        imageToDelete.remove();
+      }
+    }
+
+// Fonction pour supprimer un work
+async function supprimerWork(workId) {
   try {
-    // Effectuez un appel AJAX pour récupérer la liste des works
-    const response = await fetch('http://localhost:5678/api/works');
+    const token = localStorage.getItem("mon_token");
+    const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
+      method: "DELETE",
+      headers: {
+        'Accept': '*/*',
+        "Authorization": "Bearer " + token
+      }
+    });
 
     if (response.ok) {
-      const updatedWorksList = await response.json();
+      // Afficher une alerte pour indiquer que la suppression a réussi
+      alert(`Le work a été supprimé avec succès.`);
 
-      // Mettez à jour l'interface utilisateur avec la nouvelle liste des works
-      displayWorks(updatedWorksList);
+      // Supprimer l'élément de la galerie sans fermer la modale
+      removeWorkById(workId);
+
+      // Mise à jour de la liste des images dans la page d'accueil
+      await callApi();
+
+      // Appelez la fonction pour mettre à jour la liste des works sur la page d'accueil
+      updateAccueilWorks();
     } else {
-      throw new Error('Erreur lors de la récupération des works');
+      console.error("Erreur lors de la suppression du work");
     }
   } catch (error) {
-    console.error('Erreur lors de la mise à jour de la liste des works sur la page d\'accueil', error);
+    console.error("Erreur lors de la suppression du work", error);
   }
 }
+
+// Écouteur d'événement pour le bouton de suppression dans la modale
+boutonDelete.addEventListener("click", function () {
+  const workId = Number.isInteger(article.id) ? article.id : article.id.toString();
+  supprimerWork(workId);
+});
+
+
+      // Fonction pour mettre à jour la liste des works sur la page d'accueil
+    
+   
 // *************** .      ****************
       const boutonItrash = document.createElement("i")
       boutonItrash.classList.add("fa-solid") 
@@ -176,27 +189,22 @@ closeButton2.addEventListener('click', () => {
 
   //********* Partie de code pour poster les nouveaux works *********
 
- // Sélectionnerle formulaire et ajouterun écouteur d'événements pour la soumission
+// Sélectionner le formulaire et ajouter un écouteur d'événements pour la soumission
 const form = document.getElementById('FormAjoutWork');
 const BtnValider = document.getElementById('valider');
 
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // Empêche la soumission par défaut du formulaire
 
-    // Récupérerles valeurs des champs du formulaire
+    // Récupérer les valeurs des champs du formulaire
     const titre = document.getElementById('titre').value;
     const categorie = document.getElementById('categorie').value;
     const image = document.getElementById('btn-Ajout').files[0];
 
-
-    console.log(titre)
-    console.log(categorie)
-    console.log(image)
-
     // Validation des champs
     if (!titre || !categorie || !image) {
         alert('Veuillez remplir tous les champs du formulaire.');
-        return; // Arrêterla soumission si des champs sont manquants
+        return; // Arrêter la soumission si des champs sont manquants
     }
 
     // Créez un objet FormData pour envoyer les données du formulaire
@@ -207,94 +215,134 @@ form.addEventListener('submit', function (event) {
 
     // Récupère le token
     const mon_token = localStorage.getItem('mon_token');
-    console.log(mon_token)
-    console.log(formData)
+    
     // Envoi des données au serveur
-    fetch('http://localhost:5678/api/works', {   
+    fetch('http://localhost:5678/api/works', {
         method: 'POST',
         body: formData,
-
         headers: {
-          // 'Content-Type': `multipart/form-data`,
-        
-          // 'multipart/form-data; boundary=---------------------------123456789012345678901234567890',
-
-          'Authorization': `Bearer ${mon_token}`
+            'Authorization': `Bearer ${mon_token}`
         }
     })
-    
     .then(response => {
-      console.log(response)
         if (!response.ok) {
             throw new Error('Une erreur s\'est produite lors de la soumission du formulaire.');
         }
         return response.json();
     })
     .then(data => {
-        // Traiterla réponse du serveur ici (par exemple, afficherun message de succès)
+        // Traiter la réponse du serveur ici (par exemple, afficher un message de succès)
         console.log(data);
         alert('Work ajouté avec succès');
 
+        // Appeler la fonction pour ajouter le nouveau travail à la galerie
+        addWorkToGallery(data);
 
-        // Créerun nouvel élément HTML pour représenter le work sur la page d'accueil
-        const newWorkElement = document.createElement("article");
-        newWorkElement.classList.add("card");
-
-        const divBouton = document.createElement("div");
-        divBouton.classList.add("bouton-contener-card");
-
-        const imageElement = document.createElement("img");
-        imageElement.src = data.imageUrl;
-
-        // Créerun élément pour le titre
-        const titleElement = document.createElement("p");
-        titleElement.textContent = data.title;
-
-        // Créerun élément pour la catégorie
-        const categoryElement = document.createElement("p");
-        categoryElement.textContent = data.category;
-
-        // Ajouterle nouvel élément à la liste des works sur la page d'accueil
-        newWorkElement.appendChild(divBouton);
-        newWorkElement.appendChild(imageElement);
-        newWorkElement.appendChild(titleElement); // Ajouterle titre
-        newWorkElement.appendChild(categoryElement); // Ajouterla catégorie
-
-        const gallery = document.querySelector(".gallery");
-        // Ajoute le nouvel élément à la liste existante
-        gallery.appendChild(newWorkElement); // Ajouter le nouvel élément à la liste existante
-
-
-        // Fermerla modale "secondStepModal"
+        // Fermer la modale "secondStepModal"
         secondStepModal.close();
 
-        // Ouvrerla modale "firstStepModal"
+        // Ouvrir la modale "firstStepModal"
         firstStepModal.showModal();
 
         callApi()
+        // Réinitialiser le formulaire
+        form.reset();
 
-         // Réinitialise le formulaire
-         form.reset();
-        // Réinitialiserl'aperçu de l'image et Cache l'élément d'image
-        document.getElementById('image-preview');
-        imageP.style.display = 'none'; 
+        // Réinitialiser l'aperçu de l'image et cacher l'élément d'image
+        document.getElementById('image-preview').src = '';
+        imageP.style.display = 'none';
 
-        //Montre la div qui contient l'image
+        // Afficher la div qui contient l'image
         const imagePreview = document.getElementById('image-preview');
         imagePreview.style.display = 'block';
 
-        // Actualise la page d'accueil
-        closeButton.addEventListener('click', () => {
-          // Actualise la page d'accueil
-          window.location.reload();
-      });
+         // Actualise la page d'accueil
+         closeButton.addEventListener('click', () => {
+         // Actualise la page d'accueil
+         window.location.reload();
+         });
     })
     .catch(error => {
         console.error('Erreur lors de l\'envoi des données au serveur:', error);
         alert('Une erreur s\'est produite lors de la soumission du formulaire.');
     });
-    callApi()
 });
+
+function addWorkToGallery(data) {
+  // Créez un nouvel élément HTML pour représenter le work sur la page d'accueil
+  const newWorkElement = document.createElement("article");
+  newWorkElement.classList.add("card");
+
+  // Stockez l'ID dans un attribut de données personnalisé
+  newWorkElement.dataset.id = data.id; // Assurez-vous que data.id contient l'ID du work
+
+  const divBouton = document.createElement("div");
+  divBouton.classList.add("bouton-contener-card");
+
+  const imageElement = document.createElement("img");
+  imageElement.src = data.imageUrl;
+
+  // Créez un élément pour le titre
+  const titleElement = document.createElement("p");
+  titleElement.textContent = data.title;
+
+  // Créez un élément pour la catégorie
+  const categoryElement = document.createElement("p");
+  categoryElement.textContent = data.category;
+
+  // Ajoutez le nouvel élément à la liste des works sur la page d'accueil
+  newWorkElement.appendChild(divBouton);
+  newWorkElement.appendChild(imageElement);
+  newWorkElement.appendChild(titleElement); // Ajoutez le titre
+  newWorkElement.appendChild(categoryElement); // Ajoutez la catégorie
+
+  const gallery = document.querySelector(".gallery");
+  // Ajoutez le nouvel élément à la liste existante
+  gallery.appendChild(newWorkElement); // Ajoutez le nouvel élément à la liste existante
+}
+
+// function removeWorkById(workId) {
+//   const gallery = document.querySelector(".gallery");
+//   const workToRemove = gallery.querySelector(`[data-id="${workId}"]`);
+  
+//   if (workToRemove) {
+//       workToRemove.remove(); // Supprime l'élément de la galerie
+//   }
+// }
+
+
+
+
+//         // Fermerla modale "secondStepModal"
+//         secondStepModal.close();
+
+//         // Ouvrerla modale "firstStepModal"
+//         firstStepModal.showModal();
+
+//         callApi()
+
+//          // Réinitialise le formulaire
+//          form.reset();
+//         // Réinitialiserl'aperçu de l'image et Cache l'élément d'image
+//         document.getElementById('image-preview');
+//         imageP.style.display = 'none'; 
+
+//         //Montre la div qui contient l'image
+//         const imagePreview = document.getElementById('image-preview');
+//         imagePreview.style.display = 'block';
+
+//         // Actualise la page d'accueil
+//         closeButton.addEventListener('click', () => {
+//           // Actualise la page d'accueil
+//           window.location.reload();
+//       });
+//     })
+//     .catch(error => {
+//         console.error('Erreur lors de l\'envoi des données au serveur:', error);
+//         alert('Une erreur s\'est produite lors de la soumission du formulaire.');
+//     });
+//     callApi()
+// });
 
 
 // ****** Partie de code pour previsualisation de li'image ********
@@ -395,7 +443,8 @@ const modifierButton = document.getElementById("firstStepModalBtn");
 // Ajouterun écouteur d'événements au bouton "Modifier"
 modifierButton.addEventListener('click', function () {
   if (!isAuthenticated) {
-    alert('Veuillez vous connecter pour accéder à cette fonctionnalité.')
+    // Afficher une alerte avec un emoji sourire
+    alert('Cliquez sur ok pour vous connecter afin d\'accéder à cette fonctionnalité 😊.')
     // Si l'utilisateur n'est pas authentifié, redirigé vers la page de connexion
     window.location.href = "/login.html"; 
   } else {
