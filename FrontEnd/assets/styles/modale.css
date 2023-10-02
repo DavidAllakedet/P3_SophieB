@@ -149,8 +149,8 @@ li:hover {
 	margin: 50px;
 }
 
-/************  la modale  *********/
-.modale {
+/************  la dialoge1  *********/
+.dialoge1 {
     /* display: none;  */
     position: absolute; 
     align-items: center;
@@ -161,7 +161,7 @@ li:hover {
 	border-radius: 10px;
     background-color:white; 
     }
-    .modale h1 {
+    .dialoge1 h1 {
 		font-family: Work Sans;
 		text-align: center;
 		margin-bottom: 1em;
@@ -195,7 +195,7 @@ li:hover {
      cursor: pointer;
     }
 
-#firstStepModalBtn{
+#ModalBtn{
 	font-size: 20px;
 	display: flex;
 	flex-direction: row;
@@ -204,7 +204,7 @@ li:hover {
 	background: none;
     gap: 10px;
 }
-/* gallerie modale */
+/* gallerie dialoge1 */
 .gallery-modal {
 	/* width: 600px; */
 	display: grid;
@@ -245,7 +245,7 @@ li:hover {
     background-color: black;
     
 }
-.modale .trait{
+.dialoge1 .trait{
     margin-top: 40px;
     height: 2px;
 	justify-content: center;
@@ -254,7 +254,7 @@ li:hover {
     background-color: #B3B3B3;
 	margin: 50px; 
 }
-.boutonModale .secondStepModalBtn{
+.boutonModale .Dialogue2AjoutBtn{
 	display: flex;
 	font-family: 'Syne';
 	font-size: 18px;
@@ -277,7 +277,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 }
-.titre_modifier{
+.Modale{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -314,8 +314,8 @@ background-color: #1D6154;
     background-color: #1D6154; /* Couleur verte pour les boutons actifs */
     color: white; /* Couleur du texte en blanc */
 }
-/********* modale 2 css ********/
-.modale2 {
+/********* dialoge2 css ********/
+.dialoge2 {
 	/* display: none;  */
 	position: absolute; 
 	align-items: center;
@@ -327,13 +327,13 @@ background-color: #1D6154;
 	background-color: #fefefe;
 	/* padding: 10px 25px 25px 25px;  */
 }
-.modale2 h1{
+.dialoge2 h1{
 	font-family: Work Sans;
 	text-align: center;
 	margin-bottom: 1em;
 	color: black;
 }
-.modale2 .icones{
+.dialoge2 .icones{
 	opacity: 0;
 	padding-top: 20px;
 	width: 700px;
@@ -344,7 +344,7 @@ background-color: #1D6154;
 	background-color: none;
 	/* margin: 0 -50px; */
 }
-.modale2 .icones button{
+.dialoge2 .icones button{
 	background-color: white;
 	border: none;
 	font-weight: bolder ;
@@ -358,7 +358,7 @@ background-color: #1D6154;
 	 text-decoration: none;
      cursor: pointer;
 }
-.modale2 form{
+.dialoge2 form{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -366,7 +366,7 @@ background-color: #1D6154;
 	padding: 10px 60px 25px 60px; 
 }
 
-.modale2  form .image-Preview-C{
+.dialoge2  form .image-Preview-C{
 	position: relative;
     display: flex;
 	flex-direction: column;
@@ -379,7 +379,7 @@ background-color: #1D6154;
 	align-items: center;
 	text-align: center;
 }
-.modale2  form .image-Preview-C .image-preview{
+.dialoge2  form .image-Preview-C .image-preview{
 	position: relative;
     display: inline-block;
 	width: 100%;
@@ -390,7 +390,7 @@ background-color: #1D6154;
 	padding:20px 0;
 	text-align: center;
 }
-.modale2  form .image-Preview-C .imageP{
+.dialoge2  form .image-Preview-C .imageP{
 	align-self: center;
 	color: #CBD6DC; 
 	align-items: center;
@@ -400,7 +400,7 @@ background-color: #1D6154;
 }
 
 /* Styles pour le bouton personnalisé */
-.secondStepModalBtn {
+.Dialogue2AjoutBtn {
     display: inline-block;
     width: 250px;
 	font-family: 'Syne';
@@ -412,12 +412,12 @@ background-color: #1D6154;
 	border: none;
 	border-radius: 60px ;
 }
-.modale2 form .image-Preview-C .fa-image{
+.dialoge2 form .image-Preview-C .fa-image{
 	font-size: 100px;
 	color: #CBD6DC;
 	align-items: center;
 }
-.modale2 form .image-Preview-C .file-input {
+.dialoge2 form .image-Preview-C .file-input {
 	/* display: flex;
 	justify-content: center; */
     /* position: absolute; 
@@ -430,7 +430,7 @@ background-color: #1D6154;
     cursor: pointer;
 }
 /* Styles pour l'élément d'entrée de fichier masqué */
-.modale2 form .titre-categorie{
+.dialoge2 form .titre-categorie{
 	width: 100%;
 	text-align: left;
 	margin-top:30px;
@@ -441,14 +441,14 @@ background-color: #1D6154;
 }
 
 
-.modale2  .titre-categorie input{
+.dialoge2  .titre-categorie input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modale2  .titre-categorie .select-option{
+.dialoge2  .titre-categorie .select-option{
 	display: flex;
 	position: relative;
 	justify-content: center;
@@ -458,14 +458,14 @@ background-color: #1D6154;
     
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-.modale2  .titre-categorie select{
+.dialoge2  .titre-categorie select{
 	height: 50px;
 	border: none;
 	appearance: none;
     width: 100%;
 	
 }
-.modale2 .titre-categorie .flech-bas-container{
+.dialoge2 .titre-categorie .flech-bas-container{
 	width: 50px;
 	height: 100%;
 	display: flex;
@@ -483,10 +483,10 @@ background-color: #1D6154;
 	font-size: 10px;
 }
 
-.modale2  .titre-categorie label {
+.dialoge2  .titre-categorie label {
 	margin: 2em 0 1em 0;
 }
-.modale2 .btn-ajout{
+.dialoge2 .btn-ajout{
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';

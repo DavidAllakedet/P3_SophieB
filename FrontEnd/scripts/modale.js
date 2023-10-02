@@ -1,50 +1,52 @@
-// Boutons pour ouvrir les modales
-const firstStepModalBtn = document.getElementById('firstStepModalBtn');
-const secondStepModalBtn = document.getElementById('secondStepModalBtn');
+// Boutons pour ouvrir la modale
+const ModalBtn = document.getElementById('ModalBtn');
 
-// Sélecteur Modales
-const firstStepModal = document.getElementById('firstStepModal');
-const secondStepModal = document.getElementById('secondStepModal');
+
+// Sélecteur dialogue 
+const Dialogue2AjoutBtn = document.getElementById('Dialogue2AjoutBtn');
+
+const firstStepDialogue = document.getElementById('firstStepDialogue');
+const secondStepDialogue = document.getElementById('secondStepDialogue');
 
 // On écoute le click sur le bouton pour ouvrir la modale
-firstStepModalBtn.addEventListener('click', () => {
-  const firstStepModal = document.getElementById('firstStepModal');
-  firstStepModal.showModal();
+ModalBtn.addEventListener('click', () => {
+  const firstStepDialogue = document.getElementById('firstStepDialogue');
+  firstStepDialogue.showModal();
   callApi()
 });
 
-// Pour ouvrir la seconde modale on écoute le click sur le bouton de la première modale
-secondStepModalBtn.addEventListener('click', () => {
-  firstStepModal.close();
-  secondStepModal.showModal();
+// Pour ouvrir la seconde  dialogue on écoute le click sur le bouton de la première  dialogue
+Dialogue2AjoutBtn.addEventListener('click', () => {
+  firstStepDialogue.close();
+  secondStepDialogue.showModal();
 });
 
-// On écoute le click sur la fenêtre si la modale est ouverte et que l'élément cliqué est différent de la fenêtre alors on ferme la modale
+// On écoute le click sur la fenêtre si le  dialogue est ouverte et que l'élément cliqué est différent de la fenêtre alors on ferme le  dialogue
 window.addEventListener('click', (e) => {
-  if ((e.target == firstStepModal && firstStepModal.open) || (e.target == secondStepModal && secondStepModal.open)) {
-    firstStepModal.close();
-    secondStepModal.close();
+  if ((e.target == firstStepDialogue && firstStepDialogue.open) || (e.target == secondStepDialogue && secondStepDialogue.open)) {
+    firstStepDialogue.close();
+    secondStepDialogue.close();
     updateHomePageWorks()
   }
   updateHomePageWorks()
 });
 
-//Recupere le bouton de croix pour fermer la modale
+//Recupere le bouton de croix pour fermer la  dialogue
 const closeButton = document.getElementById('close');
 const closeButton2 = document.getElementById('close2') 
 
-// on ecoute le click sur la croix pour fermer la modale 1
+// on ecoute le click sur la croix pour fermer la  dialogue 1
 closeButton.addEventListener('click', () => {
   // Fermerle dialogue
-  firstStepModal.close();
+  firstStepDialogue.close();
 
   window.location.reload();
 });
 
-// on ecoute le click sur la croix pour fermer la modale 2
+// on ecoute le click sur la croix pour fermer la  dialogue 2
 closeButton2.addEventListener('click', () => {
   // Fermer le dialogue
-  secondStepModal.close();
+  secondStepDialogue.close();
 });
 
 
@@ -83,8 +85,12 @@ closeButton2.addEventListener('click', () => {
 
 
 
-   // Fonction pour mettre à jour la liste des works sur la page d'accueil
-   async function updateAccueilWorks() {
+  
+
+     
+
+ // Fonction pour mettre à jour la liste des works sur la page d'accueil
+ async function updateAccueilWorks() {
     try {
       // Effectuez un appel AJAX pour récupérer la liste des works
       const response = await fetch('http://localhost:5678/api/works');
@@ -102,15 +108,15 @@ closeButton2.addEventListener('click', () => {
     }
   }
 
-     // Supprimer un élément de la galerie par son ID
-    function removeWorkById(workId) {
-      const gallery = document.querySelector(".gallery");
-      const imageToDelete = gallery.querySelector(`[data-id="${workId}"]`);
-      
-      if (imageToDelete) {
-        imageToDelete.remove();
-      }
+// Supprimer un élément de la galerie par son ID
+function removeWorkById(workId) {
+    const gallery = document.querySelector(".gallery");
+    const imageToDelete = gallery.querySelector(`[data-id="${workId}"]`);
+    
+    if (imageToDelete) {
+      imageToDelete.remove();
     }
+  }
 
 // Fonction pour supprimer un work
 async function supprimerWork(workId) {
@@ -127,15 +133,26 @@ async function supprimerWork(workId) {
     if (response.ok) {
       // Afficher une alerte pour indiquer que la suppression a réussi
       alert(`Le work a été supprimé avec succès.`);
-
+      
+      
       // Supprimer l'élément de la galerie sans fermer la modale
       removeWorkById(workId);
+
+      // Appelez la fonction pour mettre à jour la liste des works sur la page d'accueil
+      updateAccueilWorks();
 
       // Mise à jour de la liste des images dans la page d'accueil
       await callApi();
 
-      // Appelez la fonction pour mettre à jour la liste des works sur la page d'accueil
-      updateAccueilWorks();
+      // Réinitialiser l'aperçu de l'image et cacher l'élément d'image
+      document.getElementById('image-preview').src = '';
+      imageP.style.display = 'none';
+
+      // Actualise la page d'accueil
+      closeButton.addEventListener('click', () => {
+        // Actualise la page d'accueil
+        window.location.reload
+                });
     } else {
       console.error("Erreur lors de la suppression du work");
     }
@@ -151,8 +168,6 @@ boutonDelete.addEventListener("click", function () {
 });
 
 
-      // Fonction pour mettre à jour la liste des works sur la page d'accueil
-    
    
 // *************** .      ****************
       const boutonItrash = document.createElement("i")
@@ -194,7 +209,8 @@ const form = document.getElementById('FormAjoutWork');
 const BtnValider = document.getElementById('valider');
 
 form.addEventListener('submit', function (event) {
-    event.preventDefault(); // Empêche la soumission par défaut du formulaire
+     // Empêcher soumission par défaut du formulaire
+    event.preventDefault(); 
 
     // Récupérer les valeurs des champs du formulaire
     const titre = document.getElementById('titre').value;
@@ -204,10 +220,11 @@ form.addEventListener('submit', function (event) {
     // Validation des champs
     if (!titre || !categorie || !image) {
         alert('Veuillez remplir tous les champs du formulaire.');
-        return; // Arrêter la soumission si des champs sont manquants
+        // Arrête la soumission si des champs sont manquants
+        return; 
     }
 
-    // Créez un objet FormData pour envoyer les données du formulaire
+    // Créer un objet FormData pour envoyer les données du formulaire
     const formData = new FormData();
     formData.append('title', titre);
     formData.append('category', categorie);
@@ -231,18 +248,18 @@ form.addEventListener('submit', function (event) {
         return response.json();
     })
     .then(data => {
-        // Traiter la réponse du serveur ici (par exemple, afficher un message de succès)
+        // Traiter la réponse du serveur ici ( affiche un message de succès)
         console.log(data);
         alert('Work ajouté avec succès');
 
-        // Appeler la fonction pour ajouter le nouveau travail à la galerie
+        // Appeler la fonction pour ajouter le nouveau work à la galerie
         addWorkToGallery(data);
 
-        // Fermer la modale "secondStepModal"
-        secondStepModal.close();
+        // Fermer  "secondStepDialogue"
+        secondStepDialogue.close();
 
-        // Ouvrir la modale "firstStepModal"
-        firstStepModal.showModal();
+        // Ouvrir la  dialogue "firstStepDialogue"
+        firstStepDialogue.showModal();
 
         callApi()
         // Réinitialiser le formulaire
@@ -256,11 +273,7 @@ form.addEventListener('submit', function (event) {
         const imagePreview = document.getElementById('image-preview');
         imagePreview.style.display = 'block';
 
-         // Actualise la page d'accueil
-         closeButton.addEventListener('click', () => {
-         // Actualise la page d'accueil
-         window.location.reload();
-         });
+         
     })
     .catch(error => {
         console.error('Erreur lors de l\'envoi des données au serveur:', error);
@@ -300,49 +313,6 @@ function addWorkToGallery(data) {
   // Ajoutez le nouvel élément à la liste existante
   gallery.appendChild(newWorkElement); // Ajoutez le nouvel élément à la liste existante
 }
-
-// function removeWorkById(workId) {
-//   const gallery = document.querySelector(".gallery");
-//   const workToRemove = gallery.querySelector(`[data-id="${workId}"]`);
-  
-//   if (workToRemove) {
-//       workToRemove.remove(); // Supprime l'élément de la galerie
-//   }
-// }
-
-
-
-
-//         // Fermerla modale "secondStepModal"
-//         secondStepModal.close();
-
-//         // Ouvrerla modale "firstStepModal"
-//         firstStepModal.showModal();
-
-//         callApi()
-
-//          // Réinitialise le formulaire
-//          form.reset();
-//         // Réinitialiserl'aperçu de l'image et Cache l'élément d'image
-//         document.getElementById('image-preview');
-//         imageP.style.display = 'none'; 
-
-//         //Montre la div qui contient l'image
-//         const imagePreview = document.getElementById('image-preview');
-//         imagePreview.style.display = 'block';
-
-//         // Actualise la page d'accueil
-//         closeButton.addEventListener('click', () => {
-//           // Actualise la page d'accueil
-//           window.location.reload();
-//       });
-//     })
-//     .catch(error => {
-//         console.error('Erreur lors de l\'envoi des données au serveur:', error);
-//         alert('Une erreur s\'est produite lors de la soumission du formulaire.');
-//     });
-//     callApi()
-// });
 
 
 // ****** Partie de code pour previsualisation de li'image ********
@@ -430,15 +400,14 @@ envoyerButton.addEventListener('click', function () {
 checkFormFields();
 
 
-
-// ********** Authenfication pour acceder aux modales **********
+// ********** Authenfication pour acceder a la modale **********
 
 
 // Vérification côté client pour l'authentification
 const isAuthenticated = localStorage.getItem("mon_token") !== null;
 
 // Sélectionnerle bouton "Modifier"
-const modifierButton = document.getElementById("firstStepModalBtn");
+const modifierButton = document.getElementById("ModalBtn");
 
 // Ajouterun écouteur d'événements au bouton "Modifier"
 modifierButton.addEventListener('click', function () {
@@ -449,11 +418,7 @@ modifierButton.addEventListener('click', function () {
     window.location.href = "/login.html"; 
   } else {
     // Si l'utilisateur est authentifié la modal s'ouvre.
-    const firstStepModal = document.getElementById('firstStepModal');
-    firstStepModal.showModal();
+    const firstStepDialogue = document.getElementById('firstStepDialogue');
+    firstStepDialogue.showModal();
   }
 });
-
-
-
-
