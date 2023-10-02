@@ -35,12 +35,12 @@ function handleLoginSubmit(event) {
 // Fonction pour gérer la déconnexion
 function deconnexion() {
     localStorage.removeItem("mon_token");
-    // Vérifiez si la page actuelle est index.html
+    // Vérifier si la page actuelle est index.html
     if (window.location.pathname.includes("index.html")) {
-        // Redirigez l'utilisateur vers la page de connexion (login.html)
+        // Rediriger l'utilisateur vers la page de connexion (login.html)
         window.location.href = "/login.html";
     } else {
-        // Sinon, rechargez simplement la page actuelle (pour mettre à jour le bouton)
+        // Sinon, recharger simplement la page actuelle (pour mettre à jour le bouton)
         window.location.reload();
     }
 }
@@ -51,17 +51,17 @@ function EtatConnexion() {
     const logoutButton = document.getElementById("logoutButton");
 
     if (localStorage.getItem("mon_token")) {
-        // L'utilisateur est connecté, masquez le bouton "Se connecter" et affichez le bouton "Se déconnecter"
+        // L'utilisateur est connecté, masquer le bouton "Se connecter" et afficher le bouton "Se déconnecter"
         loginButton.style.display = "none";
         logoutButton.style.display = "block";
     } else {
-        // L'utilisateur n'est pas connecté, masquez le bouton "Se déconnecter" et affichez le bouton "Se connecter"
+        //  si l'utilisateur n'est pas connecté, masquer le bouton "Se déconnecter" et afficher le bouton "Se connecter"
         logoutButton.style.display = "none";
         loginButton.style.display = "block";
     }
 }
 
-// Ajoutez des gestionnaires d'événements aux formulaires et boutons de déconnexion
+// Ajout gestionnaires d'événements aux formulaires et boutons de déconnexion
 const loginForm = document.querySelector("#login-form");
 const logoutButton = document.getElementById("logoutButton");
 
@@ -73,7 +73,5 @@ if (logoutButton) {
     logoutButton.addEventListener("click", deconnexion);
 }
 
-// Vérifiez l'état de connexion lors du chargement de la page
+// Vérifie l'état de la connexion lors du chargement de la page
 EtatConnexion();
-
-

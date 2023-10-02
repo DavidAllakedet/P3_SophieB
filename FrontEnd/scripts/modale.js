@@ -24,29 +24,33 @@ window.addEventListener('click', (e) => {
   if ((e.target == firstStepModal && firstStepModal.open) || (e.target == secondStepModal && secondStepModal.open)) {
     firstStepModal.close();
     secondStepModal.close();
+    updateHomePageWorks()
   }
+  updateHomePageWorks()
 });
 
 //Recupere le bouton de croix pour fermer la modale
 const closeButton = document.getElementById('close');
 const closeButton2 = document.getElementById('close2') 
 
-// on ecoute le click sur la croix pour fermer la modale1
+// on ecoute le click sur la croix pour fermer la modale 1
 closeButton.addEventListener('click', () => {
-  // Fermez le dialogue
+  // Fermerle dialogue
   firstStepModal.close();
+
+  window.location.reload();
 });
 
 // on ecoute le click sur la croix pour fermer la modale 2
 closeButton2.addEventListener('click', () => {
-  // Fermez le dialogue
+  // Fermer le dialogue
   secondStepModal.close();
 });
 
 
 
 
- // Fonction pour afficher les œuvres dans la section "gallery"
+ // Fonction pour afficher les works dans la section "gallery"
  async function callApi(){
     let list ;
     try{
@@ -61,8 +65,9 @@ closeButton2.addEventListener('click', () => {
  function displayWorks(works) {
     const lesProjets = document.querySelector(".gallery-modal");
     
+    // Efface le contenu actuel pour éviter les duplications
     console.log(lesProjets)
-    lesProjets.innerHTML = ""; // Efface le contenu actuel pour éviter les duplications
+    lesProjets.innerHTML = ""; 
   
     for (const article of works) {
       const workElement = document.createElement("article");
@@ -74,38 +79,68 @@ closeButton2.addEventListener('click', () => {
       boutonDelete.id = Number.isInteger(article.id) ? article.id : article.id.toString();
 
       boutonDelete.classList.add("bouton-S")
-      //boutonDelete.addEventListener("click", () => handleDeleteClick(article));
-      boutonDelete.addEventListener("click", function () {
-        async function supprimerWork () {
-          const workId = article.id
-          const token = localStorage.getItem("mon_token")
-          console.log(token);
-          const promise = await fetch(`http://localhost:5678/api/works/${workId}`, {
+      
+      async function supprimerWork(workId) {
+        try {
+          const token = localStorage.getItem("mon_token");
+          const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
             method: "DELETE",
-            headers:{
-              'Accept' : "*/*",
-              "Authorization" : "Bearer " + token
+            headers: {
+              'Accept': '*/*',
+              "Authorization": "Bearer " + token
             }
           });
-          if(promise.ok === true){
-            alert(`l'article a l'id ${workId} a ete supprimer avec succes`)
-          } else{
-            console.log(promise.status)
-            throw new Error("impossible de supprimer l'article")
+      
+          if (response.ok) {
+            // Afficher une alerte pour indiquer que la suppression a réussi
+            alert(`Le work a été supprimée avec succès .`);
+      
+            // Mise à jour de la liste des images dans la page d'accueil
+            const gallery = document.querySelector(".gallery");
+            const imageToDelete = gallery.querySelector(`[data-id="${workId}"]`);
+            if (imageToDelete) {
+              imageToDelete.remove();
+            }
+      
+            // Rafraîchir la liste des works sur la page d'accueil sans fermer la modale
+            await callApi();
+      
+            // Appele  la fonction pour mettre à jour la liste des works sur la page d'accueil
+            updateAccueilWorks();
+          } else {
+            console.error("Erreur lors de la suppression du work");
           }
-         for(let article in works)    {
-          console.log(boutonDelete.id)
-          if(boutonDelete.id === article.id){
-           supprimerWork()
-           }
-         }
-         callApi()
-         
-       }
-       supprimerWork()
-    })
-    
+        } catch (error) {
+          console.error("Erreur lors de la suppression du work", error);
+        }
+      }
+      
+      // Écouteur d'événement pour le bouton de suppression dans la modale
+      boutonDelete.addEventListener("click", function () {
+        const workId = Number.isInteger(article.id) ? article.id : article.id.toString();
+        supprimerWork(workId);
+      });
+      
 
+      // Fonction pour mettre à jour la liste des works sur la page d'accueil
+      
+        async function updateAccueilWorks() {
+  try {
+    // Effectuez un appel AJAX pour récupérer la liste des works
+    const response = await fetch('http://localhost:5678/api/works');
+
+    if (response.ok) {
+      const updatedWorksList = await response.json();
+
+      // Mettez à jour l'interface utilisateur avec la nouvelle liste des works
+      displayWorks(updatedWorksList);
+    } else {
+      throw new Error('Erreur lors de la récupération des works');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour de la liste des works sur la page d\'accueil', error);
+  }
+}
 // *************** .      ****************
       const boutonItrash = document.createElement("i")
       boutonItrash.classList.add("fa-solid") 
@@ -136,16 +171,19 @@ closeButton2.addEventListener('click', () => {
     }
   }
 
+
+
+
   //********* Partie de code pour poster les nouveaux works *********
 
- // Sélectionnez le formulaire et ajoutez un écouteur d'événements pour la soumission
+ // Sélectionnerle formulaire et ajouterun écouteur d'événements pour la soumission
 const form = document.getElementById('FormAjoutWork');
 const BtnValider = document.getElementById('valider');
 
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // Empêche la soumission par défaut du formulaire
 
-    // Récupérez les valeurs des champs du formulaire
+    // Récupérerles valeurs des champs du formulaire
     const titre = document.getElementById('titre').value;
     const categorie = document.getElementById('categorie').value;
     const image = document.getElementById('btn-Ajout').files[0];
@@ -158,7 +196,7 @@ form.addEventListener('submit', function (event) {
     // Validation des champs
     if (!titre || !categorie || !image) {
         alert('Veuillez remplir tous les champs du formulaire.');
-        return; // Arrêtez la soumission si des champs sont manquants
+        return; // Arrêterla soumission si des champs sont manquants
     }
 
     // Créez un objet FormData pour envoyer les données du formulaire
@@ -167,7 +205,7 @@ form.addEventListener('submit', function (event) {
     formData.append('category', categorie);
     formData.append('image', image);
 
-    // Récupérez le token
+    // Récupère le token
     const mon_token = localStorage.getItem('mon_token');
     console.log(mon_token)
     console.log(formData)
@@ -193,32 +231,61 @@ form.addEventListener('submit', function (event) {
         return response.json();
     })
     .then(data => {
-        // Traitez la réponse du serveur ici (par exemple, affichez un message de succès)
+        // Traiterla réponse du serveur ici (par exemple, afficherun message de succès)
         console.log(data);
         alert('Work ajouté avec succès');
 
-        // Fermez la modale "secondStepModal"
+
+        // Créerun nouvel élément HTML pour représenter le work sur la page d'accueil
+        const newWorkElement = document.createElement("article");
+        newWorkElement.classList.add("card");
+
+        const divBouton = document.createElement("div");
+        divBouton.classList.add("bouton-contener-card");
+
+        const imageElement = document.createElement("img");
+        imageElement.src = data.imageUrl;
+
+        // Créerun élément pour le titre
+        const titleElement = document.createElement("p");
+        titleElement.textContent = data.title;
+
+        // Créerun élément pour la catégorie
+        const categoryElement = document.createElement("p");
+        categoryElement.textContent = data.category;
+
+        // Ajouterle nouvel élément à la liste des works sur la page d'accueil
+        newWorkElement.appendChild(divBouton);
+        newWorkElement.appendChild(imageElement);
+        newWorkElement.appendChild(titleElement); // Ajouterle titre
+        newWorkElement.appendChild(categoryElement); // Ajouterla catégorie
+
+        const gallery = document.querySelector(".gallery");
+        // Ajoute le nouvel élément à la liste existante
+        gallery.appendChild(newWorkElement); // Ajouter le nouvel élément à la liste existante
+
+
+        // Fermerla modale "secondStepModal"
         secondStepModal.close();
 
-        // Ouvrez la modale "firstStepModal"
+        // Ouvrerla modale "firstStepModal"
         firstStepModal.showModal();
 
         callApi()
 
-         // Réinitialisez le formulaire
+         // Réinitialise le formulaire
          form.reset();
-        // // Réinitialisez l'aperçu de l'image
-        //Cacher l'élément d'image
+        // Réinitialiserl'aperçu de l'image et Cache l'élément d'image
         document.getElementById('image-preview');
         imageP.style.display = 'none'; 
 
-        //Montrer la div qui contient l'image
+        //Montre la div qui contient l'image
         const imagePreview = document.getElementById('image-preview');
         imagePreview.style.display = 'block';
 
-        // Actualisez la page d'accueil
+        // Actualise la page d'accueil
         closeButton.addEventListener('click', () => {
-          // Actualisez la page d'accueil
+          // Actualise la page d'accueil
           window.location.reload();
       });
     })
@@ -235,80 +302,109 @@ form.addEventListener('submit', function (event) {
 const fileInput = document.getElementById('btn-Ajout');
 const titreInput = document.getElementById('titre');
 const categorieInput = document.getElementById('categorie');
-const imageP = document.getElementById('imageP'); // Sélectionnez l'élément img pour prévisualiser l'image
+const imageP = document.getElementById('imageP'); // Sélectionnerl'élément img pour prévisualiser l'image
 
 fileInput.addEventListener('change', function () {
-    const file = fileInput.files[0]; // Obtenez le fichier sélectionné
+    const file = fileInput.files[0]; // Obtener le fichier sélectionné
 
     if (file) {
-        // Créez un objet URL pour le fichier
+        // Créer un objet URL pour le fichier
         const imageURL = URL.createObjectURL(file);
 
-        // Affichez l'image prévisualisée dans l'élément img du bouton
+        // Afficher l'image prévisualisée dans l'élément img du bouton
         imageP.src = imageURL;
-        imageP.style.display = 'block'; // Montrez l'élément d'image
+        imageP.style.display = 'block'; 
 
-        // Cachez la div image-preview
+        // Cacherla div image-preview
         const imagePreview = document.getElementById('image-preview');
         imagePreview.style.display = 'none';
     } else {
-        // Cachez l'élément d'image s'il n'y a pas de fichier sélectionné
+        // Cacher l'élément d'image s'il n'y a pas de fichier sélectionné
         imagePreview.style.display = 'none';
 
-        // Affichez à nouveau la div image-preview
+        // Afficher à nouveau la div image-preview
         const imagePreview = document.getElementById('image-preview');
         imagePreview.style.display = 'block';
     }
 });
 
-// Sélectionnez les éléments d'entrée et le bouton
-// const titreInput = document.getElementById('titre');
-// const categorieInput = document.getElementById('categorie');
-// const imageInput = document.getElementById('btn-Ajout');
-const submitButton = document.getElementById('envoyer');
 
-// Ajoutez des écouteurs d'événements pour les champs du formulaire
+// *************** verification des champs du formulaire d'ajout work
+
+const imageInput = document.getElementById('btn-Ajout')
+
+// Ajouterdes écouteurs d'événements pour les champs du formulaire
 titreInput.addEventListener('input', checkFormFields);
 categorieInput.addEventListener('input', checkFormFields);
 imageInput.addEventListener('change', checkFormFields);
 
-// Fonction pour vérifier si tous les champs sont remplis
 function checkFormFields() {
-    const titre = titreInput.value;
-    const categorie = categorieInput.value;
-    const image = fileInput.files[0];
+  const titre = titreInput.value;
+  const categorie = categorieInput.value;
+  const image = imageInput.files[0]; 
 
-    if (titre && categorie && image) {
-        // Si tous les champs sont remplis, activez le bouton Valider (passez en vert)
-        submitButton.style.backgroundColor = '#1D6154';
-        submitButton.style.color = 'white'
-        submitButton.disabled = false;
-    } else {
-        // Si un champ est manquant, désactivez le bouton Valider (passez en gris)
-        submitButton.style.backgroundColor = '#A7A7A7';
-        // submitButton.style.color = 'white'
-        submitButton.disabled = true;
-    }
+  if (titre && categorie && image) {
+    // Si tous les champs sont remplis, activer le bouton Valider (passer en vert)
+    envoyerButton.style.backgroundColor = '#1D6154';
+    envoyerButton.style.color = 'white';
+    envoyerButton.disabled = false;
+  } else {
+    // Si un champ est manquant, désactiver le bouton Valider (passer en gris)
+    envoyerButton.style.backgroundColor = '#A7A7A7';
+    envoyerButton.style.color = 'white'; 
+    // envoyerButton.disabled = true;
+  }
 }
 
-// Appelez la fonction initiale pour vérifier l'état initial du formulaire
+// Sélectionnerle bouton "Envoyer" par son ID
+const envoyerButton = document.getElementById('envoyer');
+
+// Ajouterun écouteur d'événements "click" sur le bouton
+envoyerButton.addEventListener('click', function () {
+
+  console.log('Bouton "Envoyer" cliqué.'); // Ajouterce log pour vérifier si l'événement est déclenché
+  // Récupérerles valeurs des champs du formulaire
+  const titre = document.getElementById('titre').value;
+  const categorie = document.getElementById('categorie').value;
+  const image = document.getElementById('btn-Ajout').files[0];
+
+  // Vérifiersi l'un des champs est vide
+  if (!titre || !categorie || !image) {
+    // Afficherune alerte indiquant que tous les champs doivent être remplis
+    alert('Veuillez remplir tous les champs du formulaire.');
+  } else {
+    envoyerButton.style.backgroundColor = '#A7A7A7';
+    envoyerButton.style.color = 'white';
+  }
+});
+
+// Appelerla fonction initiale pour vérifier l'état initial du formulaire
 checkFormFields();
 
 
 
-// Vérification côté client
+// ********** Authenfication pour acceder aux modales **********
+
+
+// Vérification côté client pour l'authentification
 const isAuthenticated = localStorage.getItem("mon_token") !== null;
 
-// Sélectionnez le bouton "Modifier"
+// Sélectionnerle bouton "Modifier"
 const modifierButton = document.getElementById("firstStepModalBtn");
 
-if (!isAuthenticated) {
-    // Désactivez le bouton de modification
-    modifierButton.disabled = true;
-    // Vous pouvez également masquer la fonction de modification si nécessaire
-    // modifierButton.style.display = 'none';
-}
+// Ajouterun écouteur d'événements au bouton "Modifier"
+modifierButton.addEventListener('click', function () {
+  if (!isAuthenticated) {
+    alert('Veuillez vous connecter pour accéder à cette fonctionnalité.')
+    // Si l'utilisateur n'est pas authentifié, redirigé vers la page de connexion
+    window.location.href = "/login.html"; 
+  } else {
+    // Si l'utilisateur est authentifié la modal s'ouvre.
+    const firstStepModal = document.getElementById('firstStepModal');
+    firstStepModal.showModal();
+  }
+});
 
-// Autre code de gestion du bouton de modification...
 
-callApi()
+
+
